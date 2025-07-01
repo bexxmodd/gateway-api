@@ -527,6 +527,55 @@ func TestInferSupportedFeatures(t *testing.T) {
 	}
 }
 
+func TestOnlySupportsMesh(t *testing.T) {
+	testCases := []struct {
+		name              string
+		supportedFeatures FeaturesSet
+		exemptFeatures    FeaturesSet
+		expectedFeatures  FeaturesSet
+		expectedSource    confv1.SupportedFeaturesSource
+	}{
+		{
+			name:              "properly infer supported features",
+			supportedFeatures: FeaturesSet{}.Insert(features.SupportMesh, features.SupportHTTPRoute),
+			expectedFeatures:  FeaturesSet{}.Insert(features.SupportMesh, features.SupportHTTPRoute),
+			expectedSource:    confv1.SupportedFeaturesSourceUndefined,
+		},
+	}
+	scheme := runtime.NewScheme()
+	fakeClient := fake.NewClientBuilder().
+		WithScheme(scheme).
+		WithLists(&apiextensionsv1.CustomResourceDefinitionList{}).
+		Build()
+
+	gatewayv1.Install(fakeClient.Scheme())
+	apiextensionsv1.AddToScheme(fakeClient.Scheme())
+
+	for _, tc := range testCases {
+		options := ConformanceOptions{
+			AllowCRDsMismatch: true,
+			SupportedFeatures: tc.supportedFeatures,
+			ExemptFeatures:    tc.exemptFeatures,
+			Client:            fakeClient,
+		}
+
+		t.Run(tc.name, func(t *testing.T) {
+			cSuite, err := NewConformanceTestSuite(options)
+			if err != nil {
+				t.Fatalf("error initializing conformance suite: %v", err)
+			}
+
+			if cSuite.SupportedFeaturesSource() != tc.expectedSource {
+				t.Errorf("InferredSupportedFeatures mismatch: got %v, want %v", cSuite.SupportedFeaturesSource(), tc.expectedSource)
+			}
+
+			if equal := cSuite.SupportedFeatures.Equal(tc.expectedFeatures); !equal {
+				t.Errorf("SupportedFeatures mismatch: got %v, want %v", cSuite.SupportedFeatures.UnsortedList(), tc.expectedFeatures.UnsortedList())
+			}
+		})
+	}
+}
+
 func featureNamesToSet(set []string) []gatewayv1.SupportedFeature {
 	var features []gatewayv1.SupportedFeature
 	for _, feature := range set {

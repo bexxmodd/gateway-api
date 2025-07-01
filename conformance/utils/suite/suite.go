@@ -195,15 +195,15 @@ func NewConformanceTestSuite(options ConformanceOptions) (*ConformanceTestSuite,
 	switch {
 	case options.EnableAllSupportedFeatures:
 		supportedFeatures = features.SetsToNamesSet(features.AllFeatures)
+	case options.SupportedFeatures.Has(features.SupportMesh):
+		source = confv1.SupportedFeaturesSourceUndefined
 	case shouldInferSupportedFeatures(&options):
 		var err error
 		supportedFeatures, err = fetchSupportedFeatures(options.Client, options.GatewayClassName)
 		if err != nil {
-			return nil, fmt.Errorf("Cannot infer supported features: %w", err)
+			return nil, fmt.Errorf("cannot infer supported features: %w", err)
 		}
 		source = confv1.SupportedFeaturesSourceInferred
-	case isOnlyMeshProfile(&options):
-		source = confv1.SupportedFeaturesSourceUndefined
 	}
 
 	// If features were not inferred from Status, it's a GWC issue.
@@ -645,10 +645,4 @@ func getAPIVersionAndChannel(crds []apiextensionsv1.CustomResourceDefinition) (v
 	}
 
 	return version, channel, nil
-}
-
-func isOnlyMeshProfile(_ *ConformanceOptions) bool {
-	// TODO(bexxmodd): Currently a placeholder to add logic that determines if
-	// it's only Mesh profile without GWC.
-	return false
 }
