@@ -195,7 +195,7 @@ func NewConformanceTestSuite(options ConformanceOptions) (*ConformanceTestSuite,
 	switch {
 	case options.EnableAllSupportedFeatures:
 		supportedFeatures = features.SetsToNamesSet(features.AllFeatures)
-	case options.SupportedFeatures.Has(features.SupportMesh):
+	case isMesh(&options):
 		source = confv1.SupportedFeaturesSourceUndefined
 	case shouldInferSupportedFeatures(&options):
 		var err error
@@ -645,4 +645,10 @@ func getAPIVersionAndChannel(crds []apiextensionsv1.CustomResourceDefinition) (v
 	}
 
 	return version, channel, nil
+}
+
+func isMesh(options *ConformanceOptions) bool {
+	features := features.SetsToNamesSet(features.MeshCoreFeatures, features.MeshExtendedFeatures)
+	return options.SupportedFeatures.HasAny(features.UnsortedList()...) ||
+		options.ConformanceProfiles.HasAny(MeshHTTPConformanceProfileName, MeshGRPCConformanceProfileName)
 }
