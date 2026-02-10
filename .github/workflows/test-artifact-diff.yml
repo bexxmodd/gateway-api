@@ -57,7 +57,6 @@ jobs:
           # B) Always get source from the Git archive at this exact tag (never from release assets)
           # so we build from the same version we are verifying
           curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
-          curl -sSfL -o source.tar.gz "https://github.com/kubernetes-sigs/gateway-api/archive/refs/tags/v1.4.0.tar.gz"
           tar --extract --gunzip --file source.tar.gz
           cd gateway-api-*
           echo "Building standard-install.yaml from source at tag $TAG (same version)..."
