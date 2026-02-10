@@ -38,6 +38,7 @@ jobs:
           TAG: ${{ steps.set-tag.outputs.tag }}
           REPO: ${{ github.repository }}
         run: |
+          echo "TAG: $TAG"
           set -e
           workdir=$(mktemp -d)
           cd "$workdir"
