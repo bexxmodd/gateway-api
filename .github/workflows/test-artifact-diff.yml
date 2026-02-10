@@ -38,33 +38,37 @@ jobs:
           TAG: ${{ steps.set-tag.outputs.tag }}
           REPO: ${{ github.repository }}
         run: |
-          echo "TAG: $TAG"
           set -e
+          echo "Verifying tag: $TAG"
+          echo "Comparing: (A) standard-install.yaml from release $TAG  vs  (B) standard-install.yaml built from source at $TAG"
+          echo ""
+
           workdir=$(mktemp -d)
           cd "$workdir"
 
-          # Get standard-install.yaml from the release
+          # A) Get standard-install.yaml FROM the release assets (this is what users download)
           gh release download "$TAG" --repo "$REPO" --pattern "standard-install.yaml" --dir .
+          echo "Downloaded standard-install.yaml from release $TAG"
 
-          if ! gh release download "$TAG" --repo "$REPO" --pattern "*.tar.gz" --dir . 2>/dev/null; then
-            curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
-            tar --extract --gunzip --file source.tar.gz
-            echo ">>>> 1"
-          else
-            tar --extract --gunzip --file $(ls *.tar.gz | head -1)
-            echo ">>>> 2"
-          fi
-
+          # B) Always get source from the Git archive at this exact tag (never from release assets)
+          # so we build from the same version we are verifying
+          curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
+          tar --extract --gunzip --file source.tar.gz
           cd gateway-api-*
+          echo "Building standard-install.yaml from source at tag $TAG (same version)..."
           make build-install-yaml
 
+          # B) Built file is in release/standard-install.yaml
           # Normalize copyright year so we only fail on real content differences
           sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' ../standard-install.yaml > /tmp/release.yaml
           sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' release/standard-install.yaml > /tmp/built.yaml
 
+          echo ""
+          echo "Diff: (A) release asset  vs  (B) built from source. Lines with - are in release, + are in built."
           if ! diff -u /tmp/release.yaml /tmp/built.yaml; then
             echo ""
-            echo "::error::standard-install.yaml in the release does not match the source at tag $TAG."
+            echo "::error::Release $TAG: standard-install.yaml in the release does not match the source at tag $TAG."
+            echo "The release artifact may have been built from a different commit (e.g. main ahead of the tag). See https://github.com/kubernetes-sigs/gateway-api/issues/4490"
             exit 1
           fi
-          echo "Release artifact matches source at tag. Verification passed."
+          echo "Release artifact matches source at tag $TAG. Verification passed."
