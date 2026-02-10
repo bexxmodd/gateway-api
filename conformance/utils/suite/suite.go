@@ -129,6 +129,8 @@ type ConformanceTestSuite struct {
 
 	// lock is a mutex to help ensure thread safety of the test suite object.
 	lock sync.RWMutex
+
+	failFast bool
 }
 
 // ConformanceOptions can be used to initialize a ConformanceTestSuite.
@@ -180,6 +182,8 @@ type ConformanceOptions struct {
 	AllowCRDsMismatch   bool
 	Implementation      confv1.Implementation
 	ConformanceProfiles sets.Set[ConformanceProfileName]
+
+	FailFast bool
 }
 
 type FeaturesSet = sets.Set[features.FeatureName]
@@ -315,6 +319,7 @@ func NewConformanceTestSuite(options ConformanceOptions) (*ConformanceTestSuite,
 		apiChannel:                  apiChannel,
 		supportedFeaturesSource:     source,
 		Hook:                        options.Hook,
+		failFast:                    options.FailFast,
 	}
 
 	// apply defaults
@@ -373,17 +378,34 @@ func (suite *ConformanceTestSuite) Setup(t *testing.T, tests []ConformanceTest) 
 		tlog.Logf(t, "Test Setup: Applying programmatic resources")
 		secret := kubernetes.MustCreateSelfSignedCertSecret(t, "gateway-conformance-web-backend", "certificate", []string{"*"})
 		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{secret}, suite.Cleanup)
-		secret = kubernetes.MustCreateSelfSignedCertSecret(t, "gateway-conformance-infra", "tls-validity-checks-certificate", []string{"*", "*.org"})
+		secret = kubernetes.MustCreateSelfSignedCertSecret(t, "gateway-conformance-infra", "tls-validity-checks-certificate", []string{"*", "*.org", "*.wildcard.org"})
 		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{secret}, suite.Cleanup)
+		configMap, _, _ := kubernetes.MustCreateCACertConfigMap(t, "gateway-conformance-web-backend", "web-backend-cm")
+		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{configMap}, suite.Cleanup)
+
+		// secrets for client certificates validation tests
+		caConfigMap, ca, caPrivKey := kubernetes.MustCreateCACertConfigMap(t, "gateway-conformance-infra", "tls-validity-checks-ca-certificate")
+		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{caConfigMap}, suite.Cleanup)
+		secret = kubernetes.MustCreateCASignedClientCertSecret(t, "gateway-conformance-infra", "tls-validity-checks-client-certificate", ca, caPrivKey)
+		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{secret}, suite.Cleanup)
+		caConfigMap, ca, caPrivKey = kubernetes.MustCreateCACertConfigMap(t, "gateway-conformance-infra", "tls-validity-checks-per-port-ca-certificate")
+		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{caConfigMap}, suite.Cleanup)
+		secret = kubernetes.MustCreateCASignedClientCertSecret(t, "gateway-conformance-infra", "tls-validity-checks-per-port-client-certificate", ca, caPrivKey)
+		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{secret}, suite.Cleanup)
+
 		secret = kubernetes.MustCreateSelfSignedCertSecret(t, "gateway-conformance-infra", "tls-passthrough-checks-certificate", []string{"abc.example.com"})
 		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{secret}, suite.Cleanup)
 		secret = kubernetes.MustCreateSelfSignedCertSecret(t, "gateway-conformance-app-backend", "tls-passthrough-checks-certificate", []string{"abc.example.com"})
 		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{secret}, suite.Cleanup)
-		caConfigMap, ca, caPrivKey := kubernetes.MustCreateCACertConfigMap(t, "gateway-conformance-infra", "tls-checks-ca-certificate")
+		caConfigMap, ca, caPrivKey = kubernetes.MustCreateCACertConfigMap(t, "gateway-conformance-infra", "tls-checks-ca-certificate")
 		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{caConfigMap}, suite.Cleanup)
 		secret = kubernetes.MustCreateCASignedCertSecret(t, "gateway-conformance-infra", "tls-checks-certificate", []string{"abc.example.com", "spiffe://abc.example.com/test-identity", "other.example.com"}, ca, caPrivKey)
 		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{secret}, suite.Cleanup)
 		secret = kubernetes.MustCreateCASignedClientCertSecret(t, "gateway-conformance-infra", "tls-checks-client-certificate", ca, caPrivKey)
+		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{secret}, suite.Cleanup)
+
+		// The following secret is used for TLSRoute mode Terminate validation
+		secret = kubernetes.MustCreateCASignedCertSecret(t, "gateway-conformance-infra", "tls-terminate-checks-certificate", []string{"tls.example.com"}, ca, caPrivKey)
 		suite.Applier.MustApplyObjectsWithCleanup(t, suite.Client, suite.TimeoutConfig, []client.Object{secret}, suite.Cleanup)
 
 		// The following CA certificate is used for BackendTLSPolicy testing to intentionally force TLS validation to fail.
@@ -505,6 +527,10 @@ func (suite *ConformanceTestSuite) Run(t *testing.T, tests []ConformanceTest) er
 		// such as collecting current state of the cluster for debugging.
 		if suite.Hook != nil {
 			suite.Hook(t, test, suite)
+		}
+
+		if suite.failFast {
+			break
 		}
 	}
 

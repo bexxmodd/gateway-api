@@ -905,6 +905,7 @@ const (
 
 // SessionPersistence defines the desired state of SessionPersistence.
 // +kubebuilder:validation:XValidation:message="AbsoluteTimeout must be specified when cookie lifetimeType is Permanent",rule="!has(self.cookieConfig) || !has(self.cookieConfig.lifetimeType) || self.cookieConfig.lifetimeType != 'Permanent' || has(self.absoluteTimeout)"
+// +kubebuilder:validation:XValidation:message="cookieConfig can only be set with type Cookie",rule="!has(self.cookieConfig) || self.type == 'Cookie'"
 type SessionPersistence struct {
 	// SessionName defines the name of the persistent session token
 	// which may be reflected in the cookie or the header. Users
@@ -1027,4 +1028,31 @@ type Fraction struct {
 	// +kubebuilder:default=100
 	// +kubebuilder:validation:Minimum=1
 	Denominator *int32 `json:"denominator,omitempty"`
+}
+
+// ParentGatewayReference identifies an API object including its namespace,
+// defaulting to Gateway.
+type ParentGatewayReference struct {
+	// Group is the group of the referent.
+	//
+	// +optional
+	// +kubebuilder:default="gateway.networking.k8s.io"
+	Group *Group `json:"group,omitempty"`
+
+	// Kind is kind of the referent. For example "Gateway".
+	//
+	// +optional
+	// +kubebuilder:default=Gateway
+	Kind *Kind `json:"kind,omitempty"`
+
+	// Name is the name of the referent.
+	// +required
+	Name ObjectName `json:"name"`
+
+	// Namespace is the namespace of the referent.  If not present,
+	// the namespace of the referent is assumed to be the same as
+	// the namespace of the referring object.
+	//
+	// +optional
+	Namespace *Namespace `json:"namespace,omitempty"`
 }

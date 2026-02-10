@@ -23,65 +23,67 @@ package openapi
 
 import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	runtime "k8s.io/apimachinery/pkg/runtime"
+	version "k8s.io/apimachinery/pkg/version"
 	common "k8s.io/kube-openapi/pkg/common"
 	spec "k8s.io/kube-openapi/pkg/validation/spec"
 )
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroup":                                   schema_pkg_apis_meta_v1_APIGroup(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroupList":                               schema_pkg_apis_meta_v1_APIGroupList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResource":                                schema_pkg_apis_meta_v1_APIResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResourceList":                            schema_pkg_apis_meta_v1_APIResourceList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIVersions":                                schema_pkg_apis_meta_v1_APIVersions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ApplyOptions":                               schema_pkg_apis_meta_v1_ApplyOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Condition":                                  schema_pkg_apis_meta_v1_Condition(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.CreateOptions":                              schema_pkg_apis_meta_v1_CreateOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions":                              schema_pkg_apis_meta_v1_DeleteOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Duration":                                   schema_pkg_apis_meta_v1_Duration(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.FieldSelectorRequirement":                   schema_pkg_apis_meta_v1_FieldSelectorRequirement(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.FieldsV1":                                   schema_pkg_apis_meta_v1_FieldsV1(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GetOptions":                                 schema_pkg_apis_meta_v1_GetOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupKind":                                  schema_pkg_apis_meta_v1_GroupKind(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupResource":                              schema_pkg_apis_meta_v1_GroupResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersion":                               schema_pkg_apis_meta_v1_GroupVersion(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery":                   schema_pkg_apis_meta_v1_GroupVersionForDiscovery(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionKind":                           schema_pkg_apis_meta_v1_GroupVersionKind(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionResource":                       schema_pkg_apis_meta_v1_GroupVersionResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.InternalEvent":                              schema_pkg_apis_meta_v1_InternalEvent(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector":                              schema_pkg_apis_meta_v1_LabelSelector(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement":                   schema_pkg_apis_meta_v1_LabelSelectorRequirement(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.List":                                       schema_pkg_apis_meta_v1_List(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta":                                   schema_pkg_apis_meta_v1_ListMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ListOptions":                                schema_pkg_apis_meta_v1_ListOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ManagedFieldsEntry":                         schema_pkg_apis_meta_v1_ManagedFieldsEntry(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime":                                  schema_pkg_apis_meta_v1_MicroTime(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta":                                 schema_pkg_apis_meta_v1_ObjectMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.OwnerReference":                             schema_pkg_apis_meta_v1_OwnerReference(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.PartialObjectMetadata":                      schema_pkg_apis_meta_v1_PartialObjectMetadata(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.PartialObjectMetadataList":                  schema_pkg_apis_meta_v1_PartialObjectMetadataList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Patch":                                      schema_pkg_apis_meta_v1_Patch(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.PatchOptions":                               schema_pkg_apis_meta_v1_PatchOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions":                              schema_pkg_apis_meta_v1_Preconditions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.RootPaths":                                  schema_pkg_apis_meta_v1_RootPaths(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR":                  schema_pkg_apis_meta_v1_ServerAddressByClientCIDR(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Status":                                     schema_pkg_apis_meta_v1_Status(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause":                                schema_pkg_apis_meta_v1_StatusCause(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails":                              schema_pkg_apis_meta_v1_StatusDetails(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Table":                                      schema_pkg_apis_meta_v1_Table(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TableColumnDefinition":                      schema_pkg_apis_meta_v1_TableColumnDefinition(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TableOptions":                               schema_pkg_apis_meta_v1_TableOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TableRow":                                   schema_pkg_apis_meta_v1_TableRow(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TableRowCondition":                          schema_pkg_apis_meta_v1_TableRowCondition(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Time":                                       schema_pkg_apis_meta_v1_Time(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Timestamp":                                  schema_pkg_apis_meta_v1_Timestamp(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta":                                   schema_pkg_apis_meta_v1_TypeMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.UpdateOptions":                              schema_pkg_apis_meta_v1_UpdateOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.WatchEvent":                                 schema_pkg_apis_meta_v1_WatchEvent(ref),
-		"k8s.io/apimachinery/pkg/runtime.RawExtension":                                    schema_k8sio_apimachinery_pkg_runtime_RawExtension(ref),
-		"k8s.io/apimachinery/pkg/runtime.TypeMeta":                                        schema_k8sio_apimachinery_pkg_runtime_TypeMeta(ref),
-		"k8s.io/apimachinery/pkg/runtime.Unknown":                                         schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
-		"k8s.io/apimachinery/pkg/version.Info":                                            schema_k8sio_apimachinery_pkg_version_Info(ref),
+		v1.APIGroup{}.OpenAPIModelName():                                                  schema_pkg_apis_meta_v1_APIGroup(ref),
+		v1.APIGroupList{}.OpenAPIModelName():                                              schema_pkg_apis_meta_v1_APIGroupList(ref),
+		v1.APIResource{}.OpenAPIModelName():                                               schema_pkg_apis_meta_v1_APIResource(ref),
+		v1.APIResourceList{}.OpenAPIModelName():                                           schema_pkg_apis_meta_v1_APIResourceList(ref),
+		v1.APIVersions{}.OpenAPIModelName():                                               schema_pkg_apis_meta_v1_APIVersions(ref),
+		v1.ApplyOptions{}.OpenAPIModelName():                                              schema_pkg_apis_meta_v1_ApplyOptions(ref),
+		v1.Condition{}.OpenAPIModelName():                                                 schema_pkg_apis_meta_v1_Condition(ref),
+		v1.CreateOptions{}.OpenAPIModelName():                                             schema_pkg_apis_meta_v1_CreateOptions(ref),
+		v1.DeleteOptions{}.OpenAPIModelName():                                             schema_pkg_apis_meta_v1_DeleteOptions(ref),
+		v1.Duration{}.OpenAPIModelName():                                                  schema_pkg_apis_meta_v1_Duration(ref),
+		v1.FieldSelectorRequirement{}.OpenAPIModelName():                                  schema_pkg_apis_meta_v1_FieldSelectorRequirement(ref),
+		v1.FieldsV1{}.OpenAPIModelName():                                                  schema_pkg_apis_meta_v1_FieldsV1(ref),
+		v1.GetOptions{}.OpenAPIModelName():                                                schema_pkg_apis_meta_v1_GetOptions(ref),
+		v1.GroupKind{}.OpenAPIModelName():                                                 schema_pkg_apis_meta_v1_GroupKind(ref),
+		v1.GroupResource{}.OpenAPIModelName():                                             schema_pkg_apis_meta_v1_GroupResource(ref),
+		v1.GroupVersion{}.OpenAPIModelName():                                              schema_pkg_apis_meta_v1_GroupVersion(ref),
+		v1.GroupVersionForDiscovery{}.OpenAPIModelName():                                  schema_pkg_apis_meta_v1_GroupVersionForDiscovery(ref),
+		v1.GroupVersionKind{}.OpenAPIModelName():                                          schema_pkg_apis_meta_v1_GroupVersionKind(ref),
+		v1.GroupVersionResource{}.OpenAPIModelName():                                      schema_pkg_apis_meta_v1_GroupVersionResource(ref),
+		v1.InternalEvent{}.OpenAPIModelName():                                             schema_pkg_apis_meta_v1_InternalEvent(ref),
+		v1.LabelSelector{}.OpenAPIModelName():                                             schema_pkg_apis_meta_v1_LabelSelector(ref),
+		v1.LabelSelectorRequirement{}.OpenAPIModelName():                                  schema_pkg_apis_meta_v1_LabelSelectorRequirement(ref),
+		v1.List{}.OpenAPIModelName():                                                      schema_pkg_apis_meta_v1_List(ref),
+		v1.ListMeta{}.OpenAPIModelName():                                                  schema_pkg_apis_meta_v1_ListMeta(ref),
+		v1.ListOptions{}.OpenAPIModelName():                                               schema_pkg_apis_meta_v1_ListOptions(ref),
+		v1.ManagedFieldsEntry{}.OpenAPIModelName():                                        schema_pkg_apis_meta_v1_ManagedFieldsEntry(ref),
+		v1.MicroTime{}.OpenAPIModelName():                                                 schema_pkg_apis_meta_v1_MicroTime(ref),
+		v1.ObjectMeta{}.OpenAPIModelName():                                                schema_pkg_apis_meta_v1_ObjectMeta(ref),
+		v1.OwnerReference{}.OpenAPIModelName():                                            schema_pkg_apis_meta_v1_OwnerReference(ref),
+		v1.PartialObjectMetadata{}.OpenAPIModelName():                                     schema_pkg_apis_meta_v1_PartialObjectMetadata(ref),
+		v1.PartialObjectMetadataList{}.OpenAPIModelName():                                 schema_pkg_apis_meta_v1_PartialObjectMetadataList(ref),
+		v1.Patch{}.OpenAPIModelName():                                                     schema_pkg_apis_meta_v1_Patch(ref),
+		v1.PatchOptions{}.OpenAPIModelName():                                              schema_pkg_apis_meta_v1_PatchOptions(ref),
+		v1.Preconditions{}.OpenAPIModelName():                                             schema_pkg_apis_meta_v1_Preconditions(ref),
+		v1.RootPaths{}.OpenAPIModelName():                                                 schema_pkg_apis_meta_v1_RootPaths(ref),
+		v1.ServerAddressByClientCIDR{}.OpenAPIModelName():                                 schema_pkg_apis_meta_v1_ServerAddressByClientCIDR(ref),
+		v1.Status{}.OpenAPIModelName():                                                    schema_pkg_apis_meta_v1_Status(ref),
+		v1.StatusCause{}.OpenAPIModelName():                                               schema_pkg_apis_meta_v1_StatusCause(ref),
+		v1.StatusDetails{}.OpenAPIModelName():                                             schema_pkg_apis_meta_v1_StatusDetails(ref),
+		v1.Table{}.OpenAPIModelName():                                                     schema_pkg_apis_meta_v1_Table(ref),
+		v1.TableColumnDefinition{}.OpenAPIModelName():                                     schema_pkg_apis_meta_v1_TableColumnDefinition(ref),
+		v1.TableOptions{}.OpenAPIModelName():                                              schema_pkg_apis_meta_v1_TableOptions(ref),
+		v1.TableRow{}.OpenAPIModelName():                                                  schema_pkg_apis_meta_v1_TableRow(ref),
+		v1.TableRowCondition{}.OpenAPIModelName():                                         schema_pkg_apis_meta_v1_TableRowCondition(ref),
+		v1.Time{}.OpenAPIModelName():                                                      schema_pkg_apis_meta_v1_Time(ref),
+		v1.Timestamp{}.OpenAPIModelName():                                                 schema_pkg_apis_meta_v1_Timestamp(ref),
+		v1.TypeMeta{}.OpenAPIModelName():                                                  schema_pkg_apis_meta_v1_TypeMeta(ref),
+		v1.UpdateOptions{}.OpenAPIModelName():                                             schema_pkg_apis_meta_v1_UpdateOptions(ref),
+		v1.WatchEvent{}.OpenAPIModelName():                                                schema_pkg_apis_meta_v1_WatchEvent(ref),
+		runtime.RawExtension{}.OpenAPIModelName():                                         schema_k8sio_apimachinery_pkg_runtime_RawExtension(ref),
+		runtime.TypeMeta{}.OpenAPIModelName():                                             schema_k8sio_apimachinery_pkg_runtime_TypeMeta(ref),
+		runtime.Unknown{}.OpenAPIModelName():                                              schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
+		version.Info{}.OpenAPIModelName():                                                 schema_k8sio_apimachinery_pkg_version_Info(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.AllowedListeners":                                schema_sigsk8sio_gateway_api_apis_v1_AllowedListeners(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.AllowedRoutes":                                   schema_sigsk8sio_gateway_api_apis_v1_AllowedRoutes(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.BackendObjectReference":                          schema_sigsk8sio_gateway_api_apis_v1_BackendObjectReference(ref),
@@ -143,7 +145,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"sigs.k8s.io/gateway-api/apis/v1.HTTPRouteTimeouts":                               schema_sigsk8sio_gateway_api_apis_v1_HTTPRouteTimeouts(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.HTTPURLRewriteFilter":                            schema_sigsk8sio_gateway_api_apis_v1_HTTPURLRewriteFilter(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.Listener":                                        schema_sigsk8sio_gateway_api_apis_v1_Listener(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ListenerEntry":                                   schema_sigsk8sio_gateway_api_apis_v1_ListenerEntry(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ListenerEntryStatus":                             schema_sigsk8sio_gateway_api_apis_v1_ListenerEntryStatus(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.ListenerNamespaces":                              schema_sigsk8sio_gateway_api_apis_v1_ListenerNamespaces(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ListenerSet":                                     schema_sigsk8sio_gateway_api_apis_v1_ListenerSet(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ListenerSetList":                                 schema_sigsk8sio_gateway_api_apis_v1_ListenerSetList(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ListenerSetSpec":                                 schema_sigsk8sio_gateway_api_apis_v1_ListenerSetSpec(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ListenerSetStatus":                               schema_sigsk8sio_gateway_api_apis_v1_ListenerSetStatus(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.ListenerStatus":                                  schema_sigsk8sio_gateway_api_apis_v1_ListenerStatus(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.ListenerTLSConfig":                               schema_sigsk8sio_gateway_api_apis_v1_ListenerTLSConfig(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.LocalObjectReference":                            schema_sigsk8sio_gateway_api_apis_v1_LocalObjectReference(ref),
@@ -153,9 +161,15 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"sigs.k8s.io/gateway-api/apis/v1.NamespacedPolicyTargetReference":                 schema_sigsk8sio_gateway_api_apis_v1_NamespacedPolicyTargetReference(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.ObjectReference":                                 schema_sigsk8sio_gateway_api_apis_v1_ObjectReference(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.ParametersReference":                             schema_sigsk8sio_gateway_api_apis_v1_ParametersReference(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ParentGatewayReference":                          schema_sigsk8sio_gateway_api_apis_v1_ParentGatewayReference(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.ParentReference":                                 schema_sigsk8sio_gateway_api_apis_v1_ParentReference(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.PolicyAncestorStatus":                            schema_sigsk8sio_gateway_api_apis_v1_PolicyAncestorStatus(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.PolicyStatus":                                    schema_sigsk8sio_gateway_api_apis_v1_PolicyStatus(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ReferenceGrant":                                  schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrant(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantFrom":                              schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrantFrom(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantList":                              schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrantList(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantSpec":                              schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrantSpec(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantTo":                                schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrantTo(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.RouteGroupKind":                                  schema_sigsk8sio_gateway_api_apis_v1_RouteGroupKind(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.RouteNamespaces":                                 schema_sigsk8sio_gateway_api_apis_v1_RouteNamespaces(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.RouteParentStatus":                               schema_sigsk8sio_gateway_api_apis_v1_RouteParentStatus(ref),
@@ -166,7 +180,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"sigs.k8s.io/gateway-api/apis/v1.SupportedFeature":                                schema_sigsk8sio_gateway_api_apis_v1_SupportedFeature(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.TLSConfig":                                       schema_sigsk8sio_gateway_api_apis_v1_TLSConfig(ref),
 		"sigs.k8s.io/gateway-api/apis/v1.TLSPortConfig":                                   schema_sigsk8sio_gateway_api_apis_v1_TLSPortConfig(ref),
-		"sigs.k8s.io/gateway-api/apis/v1.supportedFeatureInternal":                        schema_sigsk8sio_gateway_api_apis_v1_supportedFeatureInternal(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.TLSRoute":                                        schema_sigsk8sio_gateway_api_apis_v1_TLSRoute(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.TLSRouteList":                                    schema_sigsk8sio_gateway_api_apis_v1_TLSRouteList(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.TLSRouteRule":                                    schema_sigsk8sio_gateway_api_apis_v1_TLSRouteRule(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.TLSRouteSpec":                                    schema_sigsk8sio_gateway_api_apis_v1_TLSRouteSpec(ref),
+		"sigs.k8s.io/gateway-api/apis/v1.TLSRouteStatus":                                  schema_sigsk8sio_gateway_api_apis_v1_TLSRouteStatus(ref),
 		"sigs.k8s.io/gateway-api/apis/v1alpha2.GRPCRoute":                                 schema_sigsk8sio_gateway_api_apis_v1alpha2_GRPCRoute(ref),
 		"sigs.k8s.io/gateway-api/apis/v1alpha2.GRPCRouteList":                             schema_sigsk8sio_gateway_api_apis_v1alpha2_GRPCRouteList(ref),
 		"sigs.k8s.io/gateway-api/apis/v1alpha2.LocalPolicyTargetReference":                schema_sigsk8sio_gateway_api_apis_v1alpha2_LocalPolicyTargetReference(ref),
@@ -203,25 +221,15 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"sigs.k8s.io/gateway-api/apis/v1beta1.HTTPRoute":                                  schema_sigsk8sio_gateway_api_apis_v1beta1_HTTPRoute(ref),
 		"sigs.k8s.io/gateway-api/apis/v1beta1.HTTPRouteList":                              schema_sigsk8sio_gateway_api_apis_v1beta1_HTTPRouteList(ref),
 		"sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrant":                             schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrant(ref),
-		"sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantFrom":                         schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrantFrom(ref),
 		"sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantList":                         schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrantList(ref),
-		"sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantSpec":                         schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrantSpec(ref),
-		"sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantTo":                           schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrantTo(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.BackendTrafficPolicySpec":                 schema_sigsk8sio_gateway_api_apisx_v1alpha1_BackendTrafficPolicySpec(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.BudgetDetails":                            schema_sigsk8sio_gateway_api_apisx_v1alpha1_BudgetDetails(ref),
-		"sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerEntry":                            schema_sigsk8sio_gateway_api_apisx_v1alpha1_ListenerEntry(ref),
-		"sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerEntryStatus":                      schema_sigsk8sio_gateway_api_apisx_v1alpha1_ListenerEntryStatus(ref),
-		"sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerSetSpec":                          schema_sigsk8sio_gateway_api_apisx_v1alpha1_ListenerSetSpec(ref),
-		"sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerSetStatus":                        schema_sigsk8sio_gateway_api_apisx_v1alpha1_ListenerSetStatus(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.MeshSpec":                                 schema_sigsk8sio_gateway_api_apisx_v1alpha1_MeshSpec(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.MeshStatus":                               schema_sigsk8sio_gateway_api_apisx_v1alpha1_MeshStatus(ref),
-		"sigs.k8s.io/gateway-api/apisx/v1alpha1.ParentGatewayReference":                   schema_sigsk8sio_gateway_api_apisx_v1alpha1_ParentGatewayReference(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.RequestRate":                              schema_sigsk8sio_gateway_api_apisx_v1alpha1_RequestRate(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.RetryConstraint":                          schema_sigsk8sio_gateway_api_apisx_v1alpha1_RetryConstraint(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.XBackendTrafficPolicy":                    schema_sigsk8sio_gateway_api_apisx_v1alpha1_XBackendTrafficPolicy(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.XBackendTrafficPolicyList":                schema_sigsk8sio_gateway_api_apisx_v1alpha1_XBackendTrafficPolicyList(ref),
-		"sigs.k8s.io/gateway-api/apisx/v1alpha1.XListenerSet":                             schema_sigsk8sio_gateway_api_apisx_v1alpha1_XListenerSet(ref),
-		"sigs.k8s.io/gateway-api/apisx/v1alpha1.XListenerSetList":                         schema_sigsk8sio_gateway_api_apisx_v1alpha1_XListenerSetList(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.XMesh":                                    schema_sigsk8sio_gateway_api_apisx_v1alpha1_XMesh(ref),
 		"sigs.k8s.io/gateway-api/apisx/v1alpha1.XMeshList":                                schema_sigsk8sio_gateway_api_apisx_v1alpha1_XMeshList(ref),
 	}
@@ -269,7 +277,7 @@ func schema_pkg_apis_meta_v1_APIGroup(ref common.ReferenceCallback) common.OpenA
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery"),
+										Ref:     ref(v1.GroupVersionForDiscovery{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -279,7 +287,7 @@ func schema_pkg_apis_meta_v1_APIGroup(ref common.ReferenceCallback) common.OpenA
 						SchemaProps: spec.SchemaProps{
 							Description: "preferredVersion is the version preferred by the API server, which probably is the storage version.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery"),
+							Ref:         ref(v1.GroupVersionForDiscovery{}.OpenAPIModelName()),
 						},
 					},
 					"serverAddressByClientCIDRs": {
@@ -295,7 +303,7 @@ func schema_pkg_apis_meta_v1_APIGroup(ref common.ReferenceCallback) common.OpenA
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR"),
+										Ref:     ref(v1.ServerAddressByClientCIDR{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -306,7 +314,7 @@ func schema_pkg_apis_meta_v1_APIGroup(ref common.ReferenceCallback) common.OpenA
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery", "k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR"},
+			v1.GroupVersionForDiscovery{}.OpenAPIModelName(), v1.ServerAddressByClientCIDR{}.OpenAPIModelName()},
 	}
 }
 
@@ -344,7 +352,7 @@ func schema_pkg_apis_meta_v1_APIGroupList(ref common.ReferenceCallback) common.O
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.APIGroup"),
+										Ref:     ref(v1.APIGroup{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -355,7 +363,7 @@ func schema_pkg_apis_meta_v1_APIGroupList(ref common.ReferenceCallback) common.O
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroup"},
+			v1.APIGroup{}.OpenAPIModelName()},
 	}
 }
 
@@ -523,7 +531,7 @@ func schema_pkg_apis_meta_v1_APIResourceList(ref common.ReferenceCallback) commo
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.APIResource"),
+										Ref:     ref(v1.APIResource{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -534,7 +542,7 @@ func schema_pkg_apis_meta_v1_APIResourceList(ref common.ReferenceCallback) commo
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.APIResource"},
+			v1.APIResource{}.OpenAPIModelName()},
 	}
 }
 
@@ -592,7 +600,7 @@ func schema_pkg_apis_meta_v1_APIVersions(ref common.ReferenceCallback) common.Op
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR"),
+										Ref:     ref(v1.ServerAddressByClientCIDR{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -603,7 +611,7 @@ func schema_pkg_apis_meta_v1_APIVersions(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR"},
+			v1.ServerAddressByClientCIDR{}.OpenAPIModelName()},
 	}
 }
 
@@ -704,7 +712,7 @@ func schema_pkg_apis_meta_v1_Condition(ref common.ReferenceCallback) common.Open
 					"lastTransitionTime": {
 						SchemaProps: spec.SchemaProps{
 							Description: "lastTransitionTime is the last time the condition transitioned from one status to another. This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+							Ref:         ref(v1.Time{}.OpenAPIModelName()),
 						},
 					},
 					"reason": {
@@ -728,7 +736,7 @@ func schema_pkg_apis_meta_v1_Condition(ref common.ReferenceCallback) common.Open
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			v1.Time{}.OpenAPIModelName()},
 	}
 }
 
@@ -824,7 +832,7 @@ func schema_pkg_apis_meta_v1_DeleteOptions(ref common.ReferenceCallback) common.
 					"preconditions": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Must be fulfilled before a deletion is carried out. If not possible, a 409 Conflict status will be returned.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions"),
+							Ref:         ref(v1.Preconditions{}.OpenAPIModelName()),
 						},
 					},
 					"orphanDependents": {
@@ -872,7 +880,7 @@ func schema_pkg_apis_meta_v1_DeleteOptions(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions"},
+			v1.Preconditions{}.OpenAPIModelName()},
 	}
 }
 
@@ -1184,15 +1192,12 @@ func schema_pkg_apis_meta_v1_InternalEvent(ref common.ReferenceCallback) common.
 					"Object": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Object is:\n * If Type is Added or Modified: the new state of the object.\n * If Type is Deleted: the state of the object immediately before deletion.\n * If Type is Bookmark: the object (instance of a type being watched) where\n   only ResourceVersion field is set. On successful restart of watch from a\n   bookmark resourceVersion, client is guaranteed to not get repeat event\n   nor miss any events.\n * If Type is Error: *api.Status is recommended; other types may make sense\n   depending on context.",
-							Ref:         ref("k8s.io/apimachinery/pkg/runtime.Object"),
 						},
 					},
 				},
 				Required: []string{"Type", "Object"},
 			},
 		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/runtime.Object"},
 	}
 }
 
@@ -1232,7 +1237,7 @@ func schema_pkg_apis_meta_v1_LabelSelector(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement"),
+										Ref:     ref(v1.LabelSelectorRequirement{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -1247,7 +1252,7 @@ func schema_pkg_apis_meta_v1_LabelSelector(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement"},
+			v1.LabelSelectorRequirement{}.OpenAPIModelName()},
 	}
 }
 
@@ -1326,7 +1331,7 @@ func schema_pkg_apis_meta_v1_List(ref common.ReferenceCallback) common.OpenAPIDe
 						SchemaProps: spec.SchemaProps{
 							Description: "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
 							Default:     map[string]interface{}{},
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:         ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -1336,7 +1341,7 @@ func schema_pkg_apis_meta_v1_List(ref common.ReferenceCallback) common.OpenAPIDe
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Ref: ref("k8s.io/apimachinery/pkg/runtime.RawExtension"),
+										Ref: ref(runtime.RawExtension{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -1347,7 +1352,7 @@ func schema_pkg_apis_meta_v1_List(ref common.ReferenceCallback) common.OpenAPIDe
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "k8s.io/apimachinery/pkg/runtime.RawExtension"},
+			v1.ListMeta{}.OpenAPIModelName(), runtime.RawExtension{}.OpenAPIModelName()},
 	}
 }
 
@@ -1520,7 +1525,7 @@ func schema_pkg_apis_meta_v1_ManagedFieldsEntry(ref common.ReferenceCallback) co
 					"time": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Time is the timestamp of when the ManagedFields entry was added. The timestamp will also be updated if a field is added, the manager changes any of the owned fields value or removes a field. The timestamp does not update when a field is removed from the entry because another manager took it over.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+							Ref:         ref(v1.Time{}.OpenAPIModelName()),
 						},
 					},
 					"fieldsType": {
@@ -1533,7 +1538,7 @@ func schema_pkg_apis_meta_v1_ManagedFieldsEntry(ref common.ReferenceCallback) co
 					"fieldsV1": {
 						SchemaProps: spec.SchemaProps{
 							Description: "FieldsV1 holds the first JSON version format as described in the \"FieldsV1\" type.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.FieldsV1"),
+							Ref:         ref(v1.FieldsV1{}.OpenAPIModelName()),
 						},
 					},
 					"subresource": {
@@ -1547,7 +1552,7 @@ func schema_pkg_apis_meta_v1_ManagedFieldsEntry(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.FieldsV1", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			v1.FieldsV1{}.OpenAPIModelName(), v1.Time{}.OpenAPIModelName()},
 	}
 }
 
@@ -1622,13 +1627,13 @@ func schema_pkg_apis_meta_v1_ObjectMeta(ref common.ReferenceCallback) common.Ope
 					"creationTimestamp": {
 						SchemaProps: spec.SchemaProps{
 							Description: "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+							Ref:         ref(v1.Time{}.OpenAPIModelName()),
 						},
 					},
 					"deletionTimestamp": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+							Ref:         ref(v1.Time{}.OpenAPIModelName()),
 						},
 					},
 					"deletionGracePeriodSeconds": {
@@ -1688,7 +1693,7 @@ func schema_pkg_apis_meta_v1_ObjectMeta(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.OwnerReference"),
+										Ref:     ref(v1.OwnerReference{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -1728,7 +1733,7 @@ func schema_pkg_apis_meta_v1_ObjectMeta(ref common.ReferenceCallback) common.Ope
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ManagedFieldsEntry"),
+										Ref:     ref(v1.ManagedFieldsEntry{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -1738,7 +1743,7 @@ func schema_pkg_apis_meta_v1_ObjectMeta(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ManagedFieldsEntry", "k8s.io/apimachinery/pkg/apis/meta/v1.OwnerReference", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			v1.ManagedFieldsEntry{}.OpenAPIModelName(), v1.OwnerReference{}.OpenAPIModelName(), v1.Time{}.OpenAPIModelName()},
 	}
 }
 
@@ -1832,14 +1837,14 @@ func schema_pkg_apis_meta_v1_PartialObjectMetadata(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Description: "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
 							Default:     map[string]interface{}{},
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:         ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			v1.ObjectMeta{}.OpenAPIModelName()},
 	}
 }
 
@@ -1868,7 +1873,7 @@ func schema_pkg_apis_meta_v1_PartialObjectMetadataList(ref common.ReferenceCallb
 						SchemaProps: spec.SchemaProps{
 							Description: "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
 							Default:     map[string]interface{}{},
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:         ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -1879,7 +1884,7 @@ func schema_pkg_apis_meta_v1_PartialObjectMetadataList(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.PartialObjectMetadata"),
+										Ref:     ref(v1.PartialObjectMetadata{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -1890,7 +1895,7 @@ func schema_pkg_apis_meta_v1_PartialObjectMetadataList(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "k8s.io/apimachinery/pkg/apis/meta/v1.PartialObjectMetadata"},
+			v1.ListMeta{}.OpenAPIModelName(), v1.PartialObjectMetadata{}.OpenAPIModelName()},
 	}
 }
 
@@ -2089,7 +2094,7 @@ func schema_pkg_apis_meta_v1_Status(ref common.ReferenceCallback) common.OpenAPI
 						SchemaProps: spec.SchemaProps{
 							Description: "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
 							Default:     map[string]interface{}{},
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:         ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"status": {
@@ -2114,14 +2119,9 @@ func schema_pkg_apis_meta_v1_Status(ref common.ReferenceCallback) common.OpenAPI
 						},
 					},
 					"details": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-list-type": "atomic",
-							},
-						},
 						SchemaProps: spec.SchemaProps{
 							Description: "Extended data associated with the reason.  Each reason may define its own extended details. This field is optional and the data returned is not guaranteed to conform to any schema except that defined by the reason type.",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails"),
+							Ref:         ref(v1.StatusDetails{}.OpenAPIModelName()),
 						},
 					},
 					"code": {
@@ -2135,7 +2135,7 @@ func schema_pkg_apis_meta_v1_Status(ref common.ReferenceCallback) common.OpenAPI
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails"},
+			v1.ListMeta{}.OpenAPIModelName(), v1.StatusDetails{}.OpenAPIModelName()},
 	}
 }
 
@@ -2221,7 +2221,7 @@ func schema_pkg_apis_meta_v1_StatusDetails(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause"),
+										Ref:     ref(v1.StatusCause{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -2238,7 +2238,7 @@ func schema_pkg_apis_meta_v1_StatusDetails(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause"},
+			v1.StatusCause{}.OpenAPIModelName()},
 	}
 }
 
@@ -2267,7 +2267,7 @@ func schema_pkg_apis_meta_v1_Table(ref common.ReferenceCallback) common.OpenAPID
 						SchemaProps: spec.SchemaProps{
 							Description: "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
 							Default:     map[string]interface{}{},
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:         ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"columnDefinitions": {
@@ -2283,7 +2283,7 @@ func schema_pkg_apis_meta_v1_Table(ref common.ReferenceCallback) common.OpenAPID
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.TableColumnDefinition"),
+										Ref:     ref(v1.TableColumnDefinition{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -2302,7 +2302,7 @@ func schema_pkg_apis_meta_v1_Table(ref common.ReferenceCallback) common.OpenAPID
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.TableRow"),
+										Ref:     ref(v1.TableRow{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -2313,7 +2313,7 @@ func schema_pkg_apis_meta_v1_Table(ref common.ReferenceCallback) common.OpenAPID
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "k8s.io/apimachinery/pkg/apis/meta/v1.TableColumnDefinition", "k8s.io/apimachinery/pkg/apis/meta/v1.TableRow"},
+			v1.ListMeta{}.OpenAPIModelName(), v1.TableColumnDefinition{}.OpenAPIModelName(), v1.TableRow{}.OpenAPIModelName()},
 	}
 }
 
@@ -2444,7 +2444,7 @@ func schema_pkg_apis_meta_v1_TableRow(ref common.ReferenceCallback) common.OpenA
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.TableRowCondition"),
+										Ref:     ref(v1.TableRowCondition{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -2453,7 +2453,7 @@ func schema_pkg_apis_meta_v1_TableRow(ref common.ReferenceCallback) common.OpenA
 					"object": {
 						SchemaProps: spec.SchemaProps{
 							Description: "This field contains the requested additional information about each object based on the includeObject policy when requesting the Table. If \"None\", this field is empty, if \"Object\" this will be the default serialization of the object for the current API version, and if \"Metadata\" (the default) will contain the object metadata. Check the returned kind and apiVersion of the object before parsing. The media type of the object will always match the enclosing list - if this as a JSON table, these will be JSON encoded objects.",
-							Ref:         ref("k8s.io/apimachinery/pkg/runtime.RawExtension"),
+							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
 						},
 					},
 				},
@@ -2461,7 +2461,7 @@ func schema_pkg_apis_meta_v1_TableRow(ref common.ReferenceCallback) common.OpenA
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.TableRowCondition", "k8s.io/apimachinery/pkg/runtime.RawExtension"},
+			v1.TableRowCondition{}.OpenAPIModelName(), runtime.RawExtension{}.OpenAPIModelName()},
 	}
 }
 
@@ -2656,7 +2656,7 @@ func schema_pkg_apis_meta_v1_WatchEvent(ref common.ReferenceCallback) common.Ope
 					"object": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Object is:\n * If Type is Added or Modified: the new state of the object.\n * If Type is Deleted: the state of the object immediately before deletion.\n * If Type is Error: *Status is recommended; other types may make sense\n   depending on context.",
-							Ref:         ref("k8s.io/apimachinery/pkg/runtime.RawExtension"),
+							Ref:         ref(runtime.RawExtension{}.OpenAPIModelName()),
 						},
 					},
 				},
@@ -2664,7 +2664,7 @@ func schema_pkg_apis_meta_v1_WatchEvent(ref common.ReferenceCallback) common.Ope
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/runtime.RawExtension"},
+			runtime.RawExtension{}.OpenAPIModelName()},
 	}
 }
 
@@ -2862,7 +2862,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_AllowedListeners(ref common.ReferenceC
 				Properties: map[string]spec.Schema{
 					"namespaces": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Namespaces defines which namespaces ListenerSets can be attached to this Gateway. While this feature is experimental, the default value is to allow no ListenerSets.",
+							Description: "Namespaces defines which namespaces ListenerSets can be attached to this Gateway. The default value is to allow no ListenerSets.",
 							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.ListenerNamespaces"),
 						},
 					},
@@ -3045,7 +3045,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_BackendTLSPolicy(ref common.ReferenceC
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -3067,7 +3067,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_BackendTLSPolicy(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.BackendTLSPolicySpec", "sigs.k8s.io/gateway-api/apis/v1.PolicyStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.BackendTLSPolicySpec", "sigs.k8s.io/gateway-api/apis/v1.PolicyStatus"},
 	}
 }
 
@@ -3095,7 +3095,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_BackendTLSPolicyList(ref common.Refere
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -3116,7 +3116,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_BackendTLSPolicyList(ref common.Refere
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1.BackendTLSPolicy"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.BackendTLSPolicy"},
 	}
 }
 
@@ -3134,7 +3134,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_BackendTLSPolicySpec(ref common.Refere
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "TargetRefs identifies an API object to apply the policy to. Note that this config applies to the entire referenced resource by default, but this default may change in the future to provide a more granular application of the policy.\n\nTargetRefs must be _distinct_. This means either that:\n\n* They select different targets. If this is the case, then targetRef\n  entries are distinct. In terms of fields, this means that the\n  multi-part key defined by `group`, `kind`, and `name` must\n  be unique across all targetRef entries in the BackendTLSPolicy.\n* They select different sectionNames in the same target.\n\nWhen more than one BackendTLSPolicy selects the same target and sectionName, implementations MUST determine precedence using the following criteria, continuing on ties:\n\n* The older policy by creation timestamp takes precedence. For\n  example, a policy with a creation timestamp of \"2021-07-15\n  01:02:03\" MUST be given precedence over a policy with a\n  creation timestamp of \"2021-07-15 01:02:04\".\n* The policy appearing first in alphabetical order by {name}.\n  For example, a policy named `bar` is given precedence over a\n  policy named `baz`.\n\nFor any BackendTLSPolicy that does not take precedence, the implementation MUST ensure the `Accepted` Condition is set to `status: False`, with Reason `Conflicted`.\n\nImplementations SHOULD NOT support more than one targetRef at this time. Although the API technically allows for this, the current guidance for conflict resolution and status handling is lacking. Until that can be clarified in a future release, the safest approach is to support a single targetRef.\n\nSupport Levels:\n\n* Extended: Kubernetes Service referenced by HTTPRoute backendRefs.\n\n* Implementation-Specific: Services not connected via HTTPRoute, and any\n  other kind of backend. Implementations MAY use BackendTLSPolicy for:\n  - Services not referenced by any Route (e.g., infrastructure services)\n  - Gateway feature backends (e.g., ExternalAuth, rate-limiting services)\n  - Service mesh workload-to-service communication\n  - Other resource types beyond Service\n\nImplementations SHOULD aim to ensure that BackendTLSPolicy behavior is consistent, even outside of the extended HTTPRoute -(backendRef) -> Service path. They SHOULD clearly document how BackendTLSPolicy is interpreted in these scenarios, including:\n  - Which resources beyond Service are supported\n  - How the policy is discovered and applied\n  - Any implementation-specific semantics or restrictions\n\nNote that this config applies to the entire referenced resource by default, but this default may change in the future to provide a more granular application of the policy.",
+							Description: "TargetRefs identifies an API object to apply the policy to. Note that this config applies to the entire referenced resource by default, but this default may change in the future to provide a more granular application of the policy.\n\nTargetRefs must be _distinct_. This means either that:\n\n* They select different targets. If this is the case, then targetRef\n  entries are distinct. In terms of fields, this means that the\n  multi-part key defined by `group`, `kind`, and `name` must\n  be unique across all targetRef entries in the BackendTLSPolicy.\n* They select different sectionNames in the same target.\n\nWhen more than one BackendTLSPolicy selects the same target and sectionName, implementations MUST determine precedence using the following criteria, continuing on ties:\n\n* The older policy by creation timestamp takes precedence. For\n  example, a policy with a creation timestamp of \"2021-07-15\n  01:02:03\" MUST be given precedence over a policy with a\n  creation timestamp of \"2021-07-15 01:02:04\".\n* The policy appearing first in alphabetical order by {namespace}/{name}.\n  For example, a policy named `foo/bar` is given precedence over a\n  policy named `foo/baz`.\n\nFor any BackendTLSPolicy that does not take precedence, the implementation MUST ensure the `Accepted` Condition is set to `status: False`, with Reason `Conflicted`.\n\nImplementations SHOULD NOT support more than one targetRef at this time. Although the API technically allows for this, the current guidance for conflict resolution and status handling is lacking. Until that can be clarified in a future release, the safest approach is to support a single targetRef.\n\nSupport Levels:\n\n* Extended: Kubernetes Service referenced by HTTPRoute backendRefs.\n\n* Implementation-Specific: Services not connected via HTTPRoute, and any\n  other kind of backend. Implementations MAY use BackendTLSPolicy for:\n  - Services not referenced by any Route (e.g., infrastructure services)\n  - Gateway feature backends (e.g., ExternalAuth, rate-limiting services)\n  - Service mesh workload-to-service communication\n  - Other resource types beyond Service\n\nImplementations SHOULD aim to ensure that BackendTLSPolicy behavior is consistent, even outside of the extended HTTPRoute -(backendRef) -> Service path. They SHOULD clearly document how BackendTLSPolicy is interpreted in these scenarios, including:\n  - Which resources beyond Service are supported\n  - How the policy is discovered and applied\n  - Any implementation-specific semantics or restrictions\n\nNote that this config applies to the entire referenced resource by default, but this default may change in the future to provide a more granular application of the policy.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -3206,7 +3206,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_BackendTLSPolicyValidation(ref common.
 					},
 					"wellKnownCACertificates": {
 						SchemaProps: spec.SchemaProps{
-							Description: "WellKnownCACertificates specifies whether system CA certificates may be used in the TLS handshake between the gateway and backend pod.\n\nIf WellKnownCACertificates is unspecified or empty (\"\"), then CACertificateRefs must be specified with at least one entry for a valid configuration. Only one of CACertificateRefs or WellKnownCACertificates may be specified, not both. If an implementation does not support the WellKnownCACertificates field, or the supplied value is not recognized, the implementation MUST ensure the `Accepted` Condition on the BackendTLSPolicy is set to `status: False`, with a Reason `Invalid`.\n\nSupport: Implementation-specific",
+							Description: "WellKnownCACertificates specifies whether a well-known set of CA certificates may be used in the TLS handshake between the gateway and backend pod.\n\nIf WellKnownCACertificates is unspecified or empty (\"\"), then CACertificateRefs must be specified with at least one entry for a valid configuration. Only one of CACertificateRefs or WellKnownCACertificates may be specified, not both. If an implementation does not support the WellKnownCACertificates field, or the supplied value is not recognized, the implementation MUST ensure the `Accepted` Condition on the BackendTLSPolicy is set to `status: False`, with a Reason `Invalid`.\n\nValid values include: * \"System\" - indicates that well-known system CA certificates should be used.\n\nImplementations MAY define their own sets of CA certificates. Such definitions MUST use an implementation-specific, prefixed name, such as `mycompany.com/my-custom-ca-certifcates`.\n\nSupport: Implementation-specific",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -3363,7 +3363,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_FrontendTLSConfig(ref common.Reference
 				Properties: map[string]spec.Schema{
 					"default": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Default specifies the default client certificate validation configuration for all Listeners handling HTTPS traffic, unless a per-port configuration is defined.\n\nsupport: Core\n\n<gateway:experimental>",
+							Description: "Default specifies the default client certificate validation configuration for all Listeners handling HTTPS traffic, unless a per-port configuration is defined.\n\nsupport: Core",
 							Default:     map[string]interface{}{},
 							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.TLSConfig"),
 						},
@@ -3378,7 +3378,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_FrontendTLSConfig(ref common.Reference
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "PerPort specifies tls configuration assigned per port. Per port configuration is optional. Once set this configuration overrides the default configuration for all Listeners handling HTTPS traffic that match this port. Each override port requires a unique TLS configuration.\n\nsupport: Core\n\n<gateway:experimental>",
+							Description: "PerPort specifies tls configuration assigned per port. Per port configuration is optional. Once set this configuration overrides the default configuration for all Listeners handling HTTPS traffic that match this port. Each override port requires a unique TLS configuration.\n\nsupport: Core",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -3413,7 +3413,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_FrontendTLSValidation(ref common.Refer
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "CACertificateRefs contains one or more references to Kubernetes objects that contain TLS certificates of the Certificate Authorities that can be used as a trust anchor to validate the certificates presented by the client.\n\nA single CA certificate reference to a Kubernetes ConfigMap has \"Core\" support. Implementations MAY choose to support attaching multiple CA certificates to a Listener, but this behavior is implementation-specific.\n\nSupport: Core - A single reference to a Kubernetes ConfigMap with the CA certificate in a key named `ca.crt`.\n\nSupport: Implementation-specific (More than one certificate in a ConfigMap with different keys or more than one reference, or other kinds of resources).\n\nReferences to a resource in a different namespace are invalid UNLESS there is a ReferenceGrant in the target namespace that allows the certificate to be attached. If a ReferenceGrant does not allow this reference, the \"ResolvedRefs\" condition MUST be set to False for this listener with the \"RefNotPermitted\" reason.",
+							Description: "CACertificateRefs contains one or more references to Kubernetes objects that contain a PEM-encoded TLS CA certificate bundle, which is used as a trust anchor to validate the certificates presented by the client.\n\nA CACertificateRef is invalid if:\n\n* It refers to a resource that cannot be resolved (e.g., the\n  referenced resource does not exist) or is misconfigured (e.g., a\n  ConfigMap does not contain a key named `ca.crt`). In this case, the\n  Reason on all matching HTTPS listeners must be set to `InvalidCACertificateRef`\n  and the Message of the Condition must indicate which reference is invalid and why.\n\n* It refers to an unknown or unsupported kind of resource. In this\n  case, the Reason on all matching HTTPS listeners must be set to\n  `InvalidCACertificateKind` and the Message of the Condition must explain\n  which kind of resource is unknown or unsupported.\n\n* It refers to a resource in another namespace UNLESS there is a\n  ReferenceGrant in the target namespace that allows the CA\n  certificate to be attached. If a ReferenceGrant does not allow this\n  reference, the `ResolvedRefs` on all matching HTTPS listeners condition\n  MUST be set with the Reason `RefNotPermitted`.\n\nImplementations MAY choose to perform further validation of the certificate content (e.g., checking expiry or enforcing specific formats). In such cases, an implementation-specific Reason and Message MUST be set.\n\nIn all cases, the implementation MUST ensure that the `ResolvedRefs` condition is set to `status: False` on all targeted listeners (i.e., listeners serving HTTPS on a matching port). The condition MUST include a Reason and Message that indicate the cause of the error. If ALL CACertificateRefs are invalid, the implementation MUST also ensure the `Accepted` condition on the listener is set to `status: False`, with the Reason `NoValidCACertificate`. Implementations MAY choose to support attaching multiple CA certificates to a listener, but this behavior is implementation-specific.\n\nSupport: Core - A single reference to a Kubernetes ConfigMap, with the CA certificate in a key named `ca.crt`.\n\nSupport: Implementation-specific - More than one reference, other kinds of resources, or a single reference that includes multiple certificates.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -3647,7 +3647,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GRPCRoute(ref common.ReferenceCallback
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -3669,7 +3669,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GRPCRoute(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.GRPCRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.GRPCRouteStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.GRPCRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.GRPCRouteStatus"},
 	}
 }
 
@@ -3745,7 +3745,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GRPCRouteList(ref common.ReferenceCall
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -3766,7 +3766,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GRPCRouteList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1.GRPCRoute"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.GRPCRoute"},
 	}
 }
 
@@ -3774,7 +3774,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GRPCRouteMatch(ref common.ReferenceCal
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "GRPCRouteMatch defines the predicate used to match requests to a given action. Multiple match types are ANDed together, i.e. the match will evaluate to true only if all conditions are satisfied.\n\nFor example, the match below will match a gRPC request only if its service is `foo` AND it contains the `version: v1` header:\n\n``` matches:\n  - method:\n    type: Exact\n    service: \"foo\"\n    headers:\n  - name: \"version\"\n    value \"v1\"\n\n```",
+				Description: "GRPCRouteMatch defines the predicate used to match requests to a given action. Multiple match types are ANDed together, i.e. the match will evaluate to true only if all conditions are satisfied.\n\nFor example, the match below will match a gRPC request only if its service is `foo` AND it contains the `version: v1` header:\n\n``` matches:\n  - method:\n    type: Exact\n    service: \"foo\"\n  - headers:\n    name: \"version\"\n    value \"v1\"\n\n```",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"method": {
@@ -4037,7 +4037,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_Gateway(ref common.ReferenceCallback) 
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -4059,7 +4059,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_Gateway(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.GatewaySpec", "sigs.k8s.io/gateway-api/apis/v1.GatewayStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.GatewaySpec", "sigs.k8s.io/gateway-api/apis/v1.GatewayStatus"},
 	}
 }
 
@@ -4072,7 +4072,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayBackendTLS(ref common.Reference
 				Properties: map[string]spec.Schema{
 					"clientCertificateRef": {
 						SchemaProps: spec.SchemaProps{
-							Description: "ClientCertificateRef references an object that contains a client certificate and its associated private key. It can reference standard Kubernetes resources, i.e., Secret, or implementation-specific custom resources.\n\nA ClientCertificateRef is considered invalid if:\n\n* It refers to a resource that cannot be resolved (e.g., the referenced resource\n  does not exist) or is misconfigured (e.g., a Secret does not contain the keys\n  named `tls.crt` and `tls.key`). In this case, the `ResolvedRefs` condition\n  on the Gateway MUST be set to False with the Reason `InvalidClientCertificateRef`\n  and the Message of the Condition MUST indicate why the reference is invalid.\n\n* It refers to a resource in another namespace UNLESS there is a ReferenceGrant\n  in the target namespace that allows the certificate to be attached.\n  If a ReferenceGrant does not allow this reference, the `ResolvedRefs` condition\n  on the Gateway MUST be set to False with the Reason `RefNotPermitted`.\n\nImplementations MAY choose to perform further validation of the certificate content (e.g., checking expiry or enforcing specific formats). In such cases, an implementation-specific Reason and Message MUST be set.\n\nSupport: Core - Reference to a Kubernetes TLS Secret (with the type `kubernetes.io/tls`). Support: Implementation-specific - Other resource kinds or Secrets with a different type (e.g., `Opaque`). <gateway:experimental>",
+							Description: "ClientCertificateRef references an object that contains a client certificate and its associated private key. It can reference standard Kubernetes resources, i.e., Secret, or implementation-specific custom resources.\n\nA ClientCertificateRef is considered invalid if:\n\n* It refers to a resource that cannot be resolved (e.g., the referenced resource\n  does not exist) or is misconfigured (e.g., a Secret does not contain the keys\n  named `tls.crt` and `tls.key`). In this case, the `ResolvedRefs` condition\n  on the Gateway MUST be set to False with the Reason `InvalidClientCertificateRef`\n  and the Message of the Condition MUST indicate why the reference is invalid.\n\n* It refers to a resource in another namespace UNLESS there is a ReferenceGrant\n  in the target namespace that allows the certificate to be attached.\n  If a ReferenceGrant does not allow this reference, the `ResolvedRefs` condition\n  on the Gateway MUST be set to False with the Reason `RefNotPermitted`.\n\nImplementations MAY choose to perform further validation of the certificate content (e.g., checking expiry or enforcing specific formats). In such cases, an implementation-specific Reason and Message MUST be set.\n\nSupport: Core - Reference to a Kubernetes TLS Secret (with the type `kubernetes.io/tls`). Support: Implementation-specific - Other resource kinds or Secrets with a different type (e.g., `Opaque`).",
 							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.SecretObjectReference"),
 						},
 					},
@@ -4108,7 +4108,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayClass(ref common.ReferenceCallb
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -4130,7 +4130,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayClass(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.GatewayClassSpec", "sigs.k8s.io/gateway-api/apis/v1.GatewayClassStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.GatewayClassSpec", "sigs.k8s.io/gateway-api/apis/v1.GatewayClassStatus"},
 	}
 }
 
@@ -4158,7 +4158,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayClassList(ref common.ReferenceC
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -4179,7 +4179,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayClassList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1.GatewayClass"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.GatewayClass"},
 	}
 }
 
@@ -4243,7 +4243,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayClassStatus(ref common.Referenc
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+										Ref:     ref(v1.Condition{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -4274,7 +4274,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayClassStatus(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "sigs.k8s.io/gateway-api/apis/v1.SupportedFeature"},
+			v1.Condition{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.SupportedFeature"},
 	}
 }
 
@@ -4355,7 +4355,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayList(ref common.ReferenceCallba
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -4376,7 +4376,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayList(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1.Gateway"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.Gateway"},
 	}
 }
 
@@ -4444,13 +4444,13 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewaySpec(ref common.ReferenceCallba
 					},
 					"allowedListeners": {
 						SchemaProps: spec.SchemaProps{
-							Description: "AllowedListeners defines which ListenerSets can be attached to this Gateway. While this feature is experimental, the default value is to allow no ListenerSets.\n\n<gateway:experimental>",
+							Description: "AllowedListeners defines which ListenerSets can be attached to this Gateway. The default value is to allow no ListenerSets.",
 							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.AllowedListeners"),
 						},
 					},
 					"tls": {
 						SchemaProps: spec.SchemaProps{
-							Description: "TLS specifies frontend and backend tls configuration for entire gateway.\n\nSupport: Extended\n\n<gateway:experimental>",
+							Description: "TLS specifies frontend and backend tls configuration for entire gateway.\n\nSupport: Extended",
 							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.GatewayTLSConfig"),
 						},
 					},
@@ -4539,7 +4539,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayStatus(ref common.ReferenceCall
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+										Ref:     ref(v1.Condition{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -4578,7 +4578,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayStatus(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "sigs.k8s.io/gateway-api/apis/v1.GatewayStatusAddress", "sigs.k8s.io/gateway-api/apis/v1.ListenerStatus"},
+			v1.Condition{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.GatewayStatusAddress", "sigs.k8s.io/gateway-api/apis/v1.ListenerStatus"},
 	}
 }
 
@@ -4620,13 +4620,13 @@ func schema_sigsk8sio_gateway_api_apis_v1_GatewayTLSConfig(ref common.ReferenceC
 				Properties: map[string]spec.Schema{
 					"backend": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Backend describes TLS configuration for gateway when connecting to backends.\n\nNote that this contains only details for the Gateway as a TLS client, and does _not_ imply behavior about how to choose which backend should get a TLS connection. That is determined by the presence of a BackendTLSPolicy.\n\nSupport: Core\n\n<gateway:experimental>",
+							Description: "Backend describes TLS configuration for gateway when connecting to backends.\n\nNote that this contains only details for the Gateway as a TLS client, and does _not_ imply behavior about how to choose which backend should get a TLS connection. That is determined by the presence of a BackendTLSPolicy.\n\nSupport: Core",
 							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.GatewayBackendTLS"),
 						},
 					},
 					"frontend": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Frontend describes TLS config when client connects to Gateway. Support: Core\n\n<gateway:experimental>",
+							Description: "Frontend describes TLS config when client connects to Gateway. Support: Core",
 							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.FrontendTLSConfig"),
 						},
 					},
@@ -4790,7 +4790,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_HTTPCORSFilter(ref common.ReferenceCal
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "AllowOrigins indicates whether the response can be shared with requested resource from the given `Origin`.\n\nThe `Origin` consists of a scheme and a host, with an optional port, and takes the form `<scheme>://<host>(:<port>)`.\n\nValid values for scheme are: `http` and `https`.\n\nValid values for port are any integer between 1 and 65535 (the list of available TCP/UDP ports). Note that, if not included, port `80` is assumed for `http` scheme origins, and port `443` is assumed for `https` origins. This may affect origin matching.\n\nThe host part of the origin may contain the wildcard character `*`. These wildcard characters behave as follows:\n\n* `*` is a greedy match to the _left_, including any number of\n  DNS labels to the left of its position. This also means that\n  `*` will include any number of period `.` characters to the\n  left of its position.\n* A wildcard by itself matches all hosts.\n\nAn origin value that includes _only_ the `*` character indicates requests from all `Origin`s are allowed.\n\nWhen the `AllowOrigins` field is configured with multiple origins, it means the server supports clients from multiple origins. If the request `Origin` matches the configured allowed origins, the gateway must return the given `Origin` and sets value of the header `Access-Control-Allow-Origin` same as the `Origin` header provided by the client.\n\nThe status code of a successful response to a \"preflight\" request is always an OK status (i.e., 204 or 200).\n\nIf the request `Origin` does not match the configured allowed origins, the gateway returns 204/200 response but doesn't set the relevant cross-origin response headers. Alternatively, the gateway responds with 403 status to the \"preflight\" request is denied, coupled with omitting the CORS headers. The cross-origin request fails on the client side. Therefore, the client doesn't attempt the actual cross-origin request.\n\nThe `Access-Control-Allow-Origin` response header can only use `*` wildcard as value when the `AllowCredentials` field is false or omitted.\n\nWhen the `AllowCredentials` field is true and `AllowOrigins` field specified with the `*` wildcard, the gateway must return a single origin in the value of the `Access-Control-Allow-Origin` response header, instead of specifying the `*` wildcard. The value of the header `Access-Control-Allow-Origin` is same as the `Origin` header provided by the client.\n\nSupport: Extended",
+							Description: "AllowOrigins indicates whether the response can be shared with requested resource from the given `Origin`.\n\nThe `Origin` consists of a scheme and a host, with an optional port, and takes the form `<scheme>://<host>(:<port>)`.\n\nValid values for scheme are: `http` and `https`.\n\nValid values for port are any integer between 1 and 65535 (the list of available TCP/UDP ports). Note that, if not included, port `80` is assumed for `http` scheme origins, and port `443` is assumed for `https` origins. This may affect origin matching.\n\nThe host part of the origin may contain the wildcard character `*`. These wildcard characters behave as follows:\n\n* `*` is a greedy match to the _left_, including any number of\n  DNS labels to the left of its position. This also means that\n  `*` will include any number of period `.` characters to the\n  left of its position.\n* A wildcard by itself matches all hosts.\n\nAn origin value that includes _only_ the `*` character indicates requests from all `Origin`s are allowed.\n\nWhen the `AllowOrigins` field is configured with multiple origins, it means the server supports clients from multiple origins. If the request `Origin` matches the configured allowed origins, the gateway must return the given `Origin` and sets value of the header `Access-Control-Allow-Origin` same as the `Origin` header provided by the client.\n\nThe status code of a successful response to a \"preflight\" request is always an OK status (i.e., 204 or 200).\n\nIf the request `Origin` does not match the configured allowed origins, the gateway returns 204/200 response but doesn't set the relevant cross-origin response headers. Alternatively, the gateway responds with 403 status to the \"preflight\" request is denied, coupled with omitting the CORS headers. The cross-origin request fails on the client side. Therefore, the client doesn't attempt the actual cross-origin request.\n\nConversely, if the request `Origin` matches one of the configured allowed origins, the gateway sets the response header `Access-Control-Allow-Origin` to the same value as the `Origin` header provided by the client.\n\nWhen config has the wildcard (\"*\") in allowOrigins, and the request is not credentialed (e.g., it is a preflight request), the `Access-Control-Allow-Origin` response header either contains the wildcard as well or the Origin from the request.\n\nWhen the request is credentialed, the gateway must not specify the `*` wildcard in the `Access-Control-Allow-Origin` response header. When also the `AllowCredentials` field is true and `AllowOrigins` field specified with the `*` wildcard, the gateway must return a single origin in the value of the `Access-Control-Allow-Origin` response header, instead of specifying the `*` wildcard. The value of the header `Access-Control-Allow-Origin` is same as the `Origin` header provided by the client.\n\nSupport: Extended",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -4817,7 +4817,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_HTTPCORSFilter(ref common.ReferenceCal
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "AllowMethods indicates which HTTP methods are supported for accessing the requested resource.\n\nValid values are any method defined by RFC9110, along with the special value `*`, which represents all HTTP methods are allowed.\n\nMethod names are case-sensitive, so these values are also case-sensitive. (See https://www.rfc-editor.org/rfc/rfc2616#section-5.1.1)\n\nMultiple method names in the value of the `Access-Control-Allow-Methods` response header are separated by a comma (\",\").\n\nA CORS-safelisted method is a method that is `GET`, `HEAD`, or `POST`. (See https://fetch.spec.whatwg.org/#cors-safelisted-method) The CORS-safelisted methods are always allowed, regardless of whether they are specified in the `AllowMethods` field.\n\nWhen the `AllowMethods` field is configured with one or more methods, the gateway must return the `Access-Control-Allow-Methods` response header which value is present in the `AllowMethods` field.\n\nIf the HTTP method of the `Access-Control-Request-Method` request header is not included in the list of methods specified by the response header `Access-Control-Allow-Methods`, it will present an error on the client side.\n\nThe `Access-Control-Allow-Methods` response header can only use `*` wildcard as value when the `AllowCredentials` field is false or omitted.\n\nWhen the `AllowCredentials` field is true and `AllowMethods` field specified with the `*` wildcard, the gateway must specify one HTTP method in the value of the Access-Control-Allow-Methods response header. The value of the header `Access-Control-Allow-Methods` is same as the `Access-Control-Request-Method` header provided by the client. If the header `Access-Control-Request-Method` is not included in the request, the gateway will omit the `Access-Control-Allow-Methods` response header, instead of specifying the `*` wildcard. A Gateway implementation may choose to add implementation-specific default methods.\n\nSupport: Extended",
+							Description: "AllowMethods indicates which HTTP methods are supported for accessing the requested resource.\n\nValid values are any method defined by RFC9110, along with the special value `*`, which represents all HTTP methods are allowed.\n\nMethod names are case-sensitive, so these values are also case-sensitive. (See https://www.rfc-editor.org/rfc/rfc2616#section-5.1.1)\n\nMultiple method names in the value of the `Access-Control-Allow-Methods` response header are separated by a comma (\",\").\n\nA CORS-safelisted method is a method that is `GET`, `HEAD`, or `POST`. (See https://fetch.spec.whatwg.org/#cors-safelisted-method) The CORS-safelisted methods are always allowed, regardless of whether they are specified in the `AllowMethods` field.\n\nWhen the `AllowMethods` field is configured with one or more methods, the gateway must return the `Access-Control-Allow-Methods` response header which value is present in the `AllowMethods` field.\n\nIf the HTTP method of the `Access-Control-Request-Method` request header is not included in the list of methods specified by the response header `Access-Control-Allow-Methods`, it will present an error on the client side.\n\nIf config contains the wildcard \"*\" in allowMethods and the request is not credentialed, the `Access-Control-Allow-Methods` response header can either use the `*` wildcard or the value of Access-Control-Request-Method from the request.\n\nWhen the request is credentialed, the gateway must not specify the `*` wildcard in the `Access-Control-Allow-Methods` response header. When also the `AllowCredentials` field is true and `AllowMethods` field specified with the `*` wildcard, the gateway must specify one HTTP method in the value of the Access-Control-Allow-Methods response header. The value of the header `Access-Control-Allow-Methods` is same as the `Access-Control-Request-Method` header provided by the client. If the header `Access-Control-Request-Method` is not included in the request, the gateway will omit the `Access-Control-Allow-Methods` response header, instead of specifying the `*` wildcard.\n\nSupport: Extended",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -4837,7 +4837,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_HTTPCORSFilter(ref common.ReferenceCal
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "AllowHeaders indicates which HTTP request headers are supported for accessing the requested resource.\n\nHeader names are not case-sensitive.\n\nMultiple header names in the value of the `Access-Control-Allow-Headers` response header are separated by a comma (\",\").\n\nWhen the `AllowHeaders` field is configured with one or more headers, the gateway must return the `Access-Control-Allow-Headers` response header which value is present in the `AllowHeaders` field.\n\nIf any header name in the `Access-Control-Request-Headers` request header is not included in the list of header names specified by the response header `Access-Control-Allow-Headers`, it will present an error on the client side.\n\nIf any header name in the `Access-Control-Allow-Headers` response header does not recognize by the client, it will also occur an error on the client side.\n\nA wildcard indicates that the requests with all HTTP headers are allowed. The `Access-Control-Allow-Headers` response header can only use `*` wildcard as value when the `AllowCredentials` field is false or omitted.\n\nWhen the `AllowCredentials` field is true and `AllowHeaders` field specified with the `*` wildcard, the gateway must specify one or more HTTP headers in the value of the `Access-Control-Allow-Headers` response header. The value of the header `Access-Control-Allow-Headers` is same as the `Access-Control-Request-Headers` header provided by the client. If the header `Access-Control-Request-Headers` is not included in the request, the gateway will omit the `Access-Control-Allow-Headers` response header, instead of specifying the `*` wildcard. A Gateway implementation may choose to add implementation-specific default headers.\n\nSupport: Extended",
+							Description: "AllowHeaders indicates which HTTP request headers are supported for accessing the requested resource.\n\nHeader names are not case-sensitive.\n\nMultiple header names in the value of the `Access-Control-Allow-Headers` response header are separated by a comma (\",\").\n\nWhen the `AllowHeaders` field is configured with one or more headers, the gateway must return the `Access-Control-Allow-Headers` response header which value is present in the `AllowHeaders` field.\n\nIf any header name in the `Access-Control-Request-Headers` request header is not included in the list of header names specified by the response header `Access-Control-Allow-Headers`, it will present an error on the client side.\n\nIf any header name in the `Access-Control-Allow-Headers` response header does not recognize by the client, it will also occur an error on the client side.\n\nA wildcard indicates that the requests with all HTTP headers are allowed. If config contains the wildcard \"*\" in allowHeaders and the request is not credentialed, the `Access-Control-Allow-Headers` response header can either use the `*` wildcard or the value of Access-Control-Request-Headers from the request.\n\nWhen the request is credentialed, the gateway must not specify the `*` wildcard in the `Access-Control-Allow-Headers` response header. When also the `AllowCredentials` field is true and `AllowHeaders` field is specified with the `*` wildcard, the gateway must specify one or more HTTP headers in the value of the `Access-Control-Allow-Headers` response header. The value of the header `Access-Control-Allow-Headers` is same as the `Access-Control-Request-Headers` header provided by the client. If the header `Access-Control-Request-Headers` is not included in the request, the gateway will omit the `Access-Control-Allow-Headers` response header, instead of specifying the `*` wildcard.\n\nSupport: Extended",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -4857,7 +4857,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_HTTPCORSFilter(ref common.ReferenceCal
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "ExposeHeaders indicates which HTTP response headers can be exposed to client-side scripts in response to a cross-origin request.\n\nA CORS-safelisted response header is an HTTP header in a CORS response that it is considered safe to expose to the client scripts. The CORS-safelisted response headers include the following headers: `Cache-Control` `Content-Language` `Content-Length` `Content-Type` `Expires` `Last-Modified` `Pragma` (See https://fetch.spec.whatwg.org/#cors-safelisted-response-header-name) The CORS-safelisted response headers are exposed to client by default.\n\nWhen an HTTP header name is specified using the `ExposeHeaders` field, this additional header will be exposed as part of the response to the client.\n\nHeader names are not case-sensitive.\n\nMultiple header names in the value of the `Access-Control-Expose-Headers` response header are separated by a comma (\",\").\n\nA wildcard indicates that the responses with all HTTP headers are exposed to clients. The `Access-Control-Expose-Headers` response header can only use `*` wildcard as value when the `AllowCredentials` field is false or omitted.\n\nSupport: Extended",
+							Description: "ExposeHeaders indicates which HTTP response headers can be exposed to client-side scripts in response to a cross-origin request.\n\nA CORS-safelisted response header is an HTTP header in a CORS response that it is considered safe to expose to the client scripts. The CORS-safelisted response headers include the following headers: `Cache-Control` `Content-Language` `Content-Length` `Content-Type` `Expires` `Last-Modified` `Pragma` (See https://fetch.spec.whatwg.org/#cors-safelisted-response-header-name) The CORS-safelisted response headers are exposed to client by default.\n\nWhen an HTTP header name is specified using the `ExposeHeaders` field, this additional header will be exposed as part of the response to the client.\n\nHeader names are not case-sensitive.\n\nMultiple header names in the value of the `Access-Control-Expose-Headers` response header are separated by a comma (\",\").\n\nA wildcard indicates that the responses with all HTTP headers are exposed to clients. The `Access-Control-Expose-Headers` response header can only use `*` wildcard as value when the request is not credentialed.\n\nWhen the `exposeHeaders` config field contains the \"*\" wildcard and the request is credentialed, the gateway cannot use the `*` wildcard in the `Access-Control-Expose-Headers` response header.\n\nSupport: Extended",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -4872,7 +4872,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_HTTPCORSFilter(ref common.ReferenceCal
 					},
 					"maxAge": {
 						SchemaProps: spec.SchemaProps{
-							Description: "MaxAge indicates the duration (in seconds) for the client to cache the results of a \"preflight\" request.\n\nThe information provided by the `Access-Control-Allow-Methods` and `Access-Control-Allow-Headers` response headers can be cached by the client until the time specified by `Access-Control-Max-Age` elapses.\n\nThe default value of `Access-Control-Max-Age` response header is 5 (seconds).",
+							Description: "MaxAge indicates the duration (in seconds) for the client to cache the results of a \"preflight\" request.\n\nThe information provided by the `Access-Control-Allow-Methods` and `Access-Control-Allow-Headers` response headers can be cached by the client until the time specified by `Access-Control-Max-Age` elapses.\n\nThe default value of `Access-Control-Max-Age` response header is 5 (seconds).\n\nWhen the `MaxAge` field is unspecified, the gateway sets the response header \"Access-Control-Max-Age: 5\" by default.",
 							Type:        []string{"integer"},
 							Format:      "int32",
 						},
@@ -5286,7 +5286,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_HTTPRoute(ref common.ReferenceCallback
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -5308,7 +5308,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_HTTPRoute(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.HTTPRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.HTTPRouteStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.HTTPRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.HTTPRouteStatus"},
 	}
 }
 
@@ -5408,7 +5408,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_HTTPRouteList(ref common.ReferenceCall
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -5429,7 +5429,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_HTTPRouteList(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1.HTTPRoute"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.HTTPRoute"},
 	}
 }
 
@@ -5878,6 +5878,133 @@ func schema_sigsk8sio_gateway_api_apis_v1_Listener(ref common.ReferenceCallback)
 	}
 }
 
+func schema_sigsk8sio_gateway_api_apis_v1_ListenerEntry(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the Listener. This name MUST be unique within a ListenerSet.\n\nName is not required to be unique across a Gateway and ListenerSets. Routes can attach to a Listener by having a ListenerSet as a parentRef and setting the SectionName",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"hostname": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hostname specifies the virtual hostname to match for protocol types that define this concept. When unspecified, all hostnames are matched. This field is ignored for protocols that don't require hostname based matching.\n\nImplementations MUST apply Hostname matching appropriately for each of the following protocols:\n\n* TLS: The Listener Hostname MUST match the SNI. * HTTP: The Listener Hostname MUST match the Host header of the request. * HTTPS: The Listener Hostname SHOULD match at both the TLS and HTTP\n  protocol layers as described above. If an implementation does not\n  ensure that both the SNI and Host header match the Listener hostname,\n  it MUST clearly document that.\n\nFor HTTPRoute and TLSRoute resources, there is an interaction with the `spec.hostnames` array. When both listener and route specify hostnames, there MUST be an intersection between the values for a Route to be accepted. For more information, refer to the Route specific Hostnames documentation.\n\nHostnames that are prefixed with a wildcard label (`*.`) are interpreted as a suffix match. That means that a match for `*.example.com` would match both `test.example.com`, and `foo.test.example.com`, but not `example.com`.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"port": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Port is the network port. Multiple listeners may use the same port, subject to the Listener compatibility rules.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"protocol": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Protocol specifies the network protocol this listener expects to receive.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"tls": {
+						SchemaProps: spec.SchemaProps{
+							Description: "TLS is the TLS configuration for the Listener. This field is required if the Protocol field is \"HTTPS\" or \"TLS\". It is invalid to set this field if the Protocol field is \"HTTP\", \"TCP\", or \"UDP\".\n\nThe association of SNIs to Certificate defined in ListenerTLSConfig is defined based on the Hostname field for this listener.\n\nThe GatewayClass MUST use the longest matching SNI out of all available certificates for any TLS handshake.",
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.ListenerTLSConfig"),
+						},
+					},
+					"allowedRoutes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AllowedRoutes defines the types of routes that MAY be attached to a Listener and the trusted namespaces where those Route resources MAY be present.\n\nAlthough a client request may match multiple route rules, only one rule may ultimately receive the request. Matching precedence MUST be determined in order of the following criteria:\n\n* The most specific match as defined by the Route type. * The oldest Route based on creation timestamp. For example, a Route with\n  a creation timestamp of \"2020-09-08 01:02:03\" is given precedence over\n  a Route with a creation timestamp of \"2020-09-08 01:02:04\".\n* If everything else is equivalent, the Route appearing first in\n  alphabetical order (namespace/name) should be given precedence. For\n  example, foo/bar is given precedence over foo/baz.\n\nAll valid rules within a Route attached to this Listener should be implemented. Invalid Route rules can be ignored (sometimes that will mean the full Route). If a Route rule transitions from valid to invalid, support for that Route rule should be dropped to ensure consistency. For example, even if a filter specified by a Route rule is invalid, the rest of the rules within that Route should still be supported.",
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.AllowedRoutes"),
+						},
+					},
+				},
+				Required: []string{"name", "port", "protocol"},
+			},
+		},
+		Dependencies: []string{
+			"sigs.k8s.io/gateway-api/apis/v1.AllowedRoutes", "sigs.k8s.io/gateway-api/apis/v1.ListenerTLSConfig"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ListenerEntryStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ListenerStatus is the status associated with a Listener.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the Listener that this status corresponds to.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"supportedKinds": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "SupportedKinds is the list indicating the Kinds supported by this listener. This MUST represent the kinds supported by an implementation for that Listener configuration.\n\nIf kinds are specified in Spec that are not supported, they MUST NOT appear in this list and an implementation MUST set the \"ResolvedRefs\" condition to \"False\" with the \"InvalidRouteKinds\" reason. If both valid and invalid Route kinds are specified, the implementation MUST reference the valid Route kinds that have been specified.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.RouteGroupKind"),
+									},
+								},
+							},
+						},
+					},
+					"attachedRoutes": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AttachedRoutes represents the total number of Routes that have been successfully attached to this Listener.\n\nSuccessful attachment of a Route to a Listener is based solely on the combination of the AllowedRoutes field on the corresponding Listener and the Route's ParentRefs field. A Route is successfully attached to a Listener when it is selected by the Listener's AllowedRoutes field AND the Route has a valid ParentRef selecting the whole Gateway resource or a specific Listener as a parent resource (more detail on attachment semantics can be found in the documentation on the various Route kinds ParentRefs fields). Listener status does not impact successful attachment, i.e. the AttachedRoutes field count MUST be set for Listeners, even if the Accepted condition of an individual Listener is set to \"False\". The AttachedRoutes number represents the number of Routes with the Accepted condition set to \"True\" that have been attached to this Listener. Routes with any other value for the Accepted condition MUST NOT be included in this count.\n\nUses for this field include troubleshooting Route attachment and measuring blast radius/impact of changes to a Listener.",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions describe the current condition of this listener.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1.Condition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name", "supportedKinds", "attachedRoutes", "conditions"},
+			},
+		},
+		Dependencies: []string{
+			v1.Condition{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.RouteGroupKind"},
+	}
+}
+
 func schema_sigsk8sio_gateway_api_apis_v1_ListenerNamespaces(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -5887,7 +6014,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_ListenerNamespaces(ref common.Referenc
 				Properties: map[string]spec.Schema{
 					"from": {
 						SchemaProps: spec.SchemaProps{
-							Description: "From indicates where ListenerSets can attach to this Gateway. Possible values are:\n\n* Same: Only ListenerSets in the same namespace may be attached to this Gateway. * Selector: ListenerSets in namespaces selected by the selector may be attached to this Gateway. * All: ListenerSets in all namespaces may be attached to this Gateway. * None: Only listeners defined in the Gateway's spec are allowed\n\nWhile this feature is experimental, the default value None",
+							Description: "From indicates where ListenerSets can attach to this Gateway. Possible values are:\n\n* Same: Only ListenerSets in the same namespace may be attached to this Gateway. * Selector: ListenerSets in namespaces selected by the selector may be attached to this Gateway. * All: ListenerSets in all namespaces may be attached to this Gateway. * None: Only listeners defined in the Gateway's spec are allowed\n\nThe default value None",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -5895,14 +6022,215 @@ func schema_sigsk8sio_gateway_api_apis_v1_ListenerNamespaces(ref common.Referenc
 					"selector": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Selector must be specified when From is set to \"Selector\". In that case, only ListenerSets in Namespaces matching this Selector will be selected by this Gateway. This field is ignored for other values of \"From\".",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"),
+							Ref:         ref(v1.LabelSelector{}.OpenAPIModelName()),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"},
+			v1.LabelSelector{}.OpenAPIModelName()},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ListenerSet(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ListenerSet defines a set of additional listeners to attach to an existing Gateway. This resource provides a mechanism to merge multiple listeners into a single Gateway.\n\nThe parent Gateway must explicitly allow ListenerSet attachment through its AllowedListeners configuration. By default, Gateways do not allow ListenerSet attachment.\n\nRoutes can attach to a ListenerSet by specifying it as a parentRef, and can optionally target specific listeners using the sectionName field.\n\nPolicy Attachment: - Policies that attach to a ListenerSet apply to all listeners defined in that resource - Policies do not impact listeners in the parent Gateway - Different ListenerSets attached to the same Gateway can have different policies - If an implementation cannot apply a policy to specific listeners, it should reject the policy\n\nReferenceGrant Semantics: - ReferenceGrants applied to a Gateway are not inherited by child ListenerSets - ReferenceGrants applied to a ListenerSet do not grant permission to the parent Gateway's listeners - A ListenerSet can reference secrets/backends in its own namespace without a ReferenceGrant\n\nGateway Integration:\n  - The parent Gateway's status will include \"AttachedListenerSets\"\n    which is the count of ListenerSets that have successfully attached to a Gateway\n    A ListenerSet is successfully attached to a Gateway when all the following conditions are met:\n  - The ListenerSet is selected by the Gateway's AllowedListeners field\n  - The ListenerSet has a valid ParentRef selecting the Gateway\n  - The ListenerSet's status has the condition \"Accepted: true\"",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Spec defines the desired state of ListenerSet.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.ListenerSetSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status defines the current state of ListenerSet.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.ListenerSetStatus"),
+						},
+					},
+				},
+				Required: []string{"spec"},
+			},
+		},
+		Dependencies: []string{
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ListenerSetSpec", "sigs.k8s.io/gateway-api/apis/v1.ListenerSetStatus"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ListenerSetList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.ListenerSet"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ListenerSet"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ListenerSetSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ListenerSetSpec defines the desired state of a ListenerSet.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"parentRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ParentRef references the Gateway that the listeners are attached to.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.ParentGatewayReference"),
+						},
+					},
+					"listeners": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"name",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Listeners associated with this ListenerSet. Listeners define logical endpoints that are bound on this referenced parent Gateway's addresses.\n\nListeners in a `Gateway` and their attached `ListenerSets` are concatenated as a list when programming the underlying infrastructure. Each listener name does not need to be unique across the Gateway and ListenerSets. See ListenerEntry.Name for more details.\n\nImplementations MUST treat the parent Gateway as having the merged list of all listeners from itself and attached ListenerSets using the following precedence:\n\n1. \"parent\" Gateway 2. ListenerSet ordered by creation time (oldest first) 3. ListenerSet ordered alphabetically by \"{namespace}/{name}\".\n\nAn implementation MAY reject listeners by setting the ListenerEntryStatus `Accepted` condition to False with the Reason `TooManyListeners`\n\nIf a listener has a conflict, this will be reported in the Status.ListenerEntryStatus setting the `Conflicted` condition to True.\n\nImplementations SHOULD be cautious about what information from the parent or siblings are reported to avoid accidentally leaking sensitive information that the child would not otherwise have access to. This can include contents of secrets etc.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.ListenerEntry"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"parentRef", "listeners"},
+			},
+		},
+		Dependencies: []string{
+			"sigs.k8s.io/gateway-api/apis/v1.ListenerEntry", "sigs.k8s.io/gateway-api/apis/v1.ParentGatewayReference"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ListenerSetStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions describe the current conditions of the ListenerSet.\n\nImplementations MUST express ListenerSet conditions using the `ListenerSetConditionType` and `ListenerSetConditionReason` constants so that operators and tools can converge on a common vocabulary to describe ListenerSet state.\n\nKnown condition types are:\n\n* \"Accepted\" * \"Programmed\"",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref(v1.Condition{}.OpenAPIModelName()),
+									},
+								},
+							},
+						},
+					},
+					"listeners": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"name",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Listeners provide status for each unique listener port defined in the Spec.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.ListenerEntryStatus"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1.Condition{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ListenerEntryStatus"},
 	}
 }
 
@@ -5964,7 +6292,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_ListenerStatus(ref common.ReferenceCal
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+										Ref:     ref(v1.Condition{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -5975,7 +6303,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_ListenerStatus(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "sigs.k8s.io/gateway-api/apis/v1.RouteGroupKind"},
+			v1.Condition{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.RouteGroupKind"},
 	}
 }
 
@@ -6330,6 +6658,49 @@ func schema_sigsk8sio_gateway_api_apis_v1_ParametersReference(ref common.Referen
 	}
 }
 
+func schema_sigsk8sio_gateway_api_apis_v1_ParentGatewayReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ParentGatewayReference identifies an API object including its namespace, defaulting to Gateway.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Group is the group of the referent.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is kind of the referent. For example \"Gateway\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the referent.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace is the namespace of the referent.  If not present, the namespace of the referent is assumed to be the same as the namespace of the referring object.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
+	}
+}
+
 func schema_sigsk8sio_gateway_api_apis_v1_ParentReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -6425,7 +6796,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_PolicyAncestorStatus(ref common.Refere
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+										Ref:     ref(v1.Condition{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -6436,7 +6807,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_PolicyAncestorStatus(ref common.Refere
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "sigs.k8s.io/gateway-api/apis/v1.ParentReference"},
+			v1.Condition{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ParentReference"},
 	}
 }
 
@@ -6472,6 +6843,226 @@ func schema_sigsk8sio_gateway_api_apis_v1_PolicyStatus(ref common.ReferenceCallb
 		},
 		Dependencies: []string{
 			"sigs.k8s.io/gateway-api/apis/v1.PolicyAncestorStatus"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrant(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ReferenceGrant identifies kinds of resources in other namespaces that are trusted to reference the specified kinds of resources in the same namespace as the policy.\n\nEach ReferenceGrant can be used to represent a unique trust relationship. Additional Reference Grants can be used to add to the set of trusted sources of inbound references for the namespace they are defined within.\n\nAll cross-namespace references in Gateway API (with the exception of cross-namespace Gateway-route attachment) require a ReferenceGrant.\n\nReferenceGrant is a form of runtime verification allowing users to assert which cross-namespace object references are permitted. Implementations that support ReferenceGrant MUST NOT permit cross-namespace references which have no grant, and MUST respond to the removal of a grant by revoking the access that the grant allowed.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Spec defines the desired state of ReferenceGrant.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantSpec"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrantFrom(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ReferenceGrantFrom describes trusted namespaces and kinds.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Group is the group of the referent. When empty, the Kubernetes core API group is inferred.\n\nSupport: Core",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is the kind of the referent. Although implementations may support additional resources, the following types are part of the \"Core\" support level for this field.\n\nWhen used to permit a SecretObjectReference:\n\n* Gateway\n\nWhen used to permit a BackendObjectReference:\n\n* GRPCRoute * HTTPRoute * TCPRoute * TLSRoute * UDPRoute",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace is the namespace of the referent.\n\nSupport: Core",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"group", "kind", "namespace"},
+			},
+		},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrantList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ReferenceGrantList contains a list of ReferenceGrant.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.ReferenceGrant"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ReferenceGrant"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrantSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ReferenceGrantSpec identifies a cross namespace relationship that is trusted for Gateway API.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"from": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "From describes the trusted namespaces and kinds that can reference the resources described in \"To\". Each entry in this list MUST be considered to be an additional place that references can be valid from, or to put this another way, entries MUST be combined using OR.\n\nSupport: Core",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantFrom"),
+									},
+								},
+							},
+						},
+					},
+					"to": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "To describes the resources that may be referenced by the resources described in \"From\". Each entry in this list MUST be considered to be an additional place that references can be valid to, or to put this another way, entries MUST be combined using OR.\n\nSupport: Core",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantTo"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"from", "to"},
+			},
+		},
+		Dependencies: []string{
+			"sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantFrom", "sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantTo"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_ReferenceGrantTo(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ReferenceGrantTo describes what Kinds are allowed as targets of the references.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Group is the group of the referent. When empty, the Kubernetes core API group is inferred.\n\nSupport: Core",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is the kind of the referent. Although implementations may support additional resources, the following types are part of the \"Core\" support level for this field:\n\n* Secret when used to permit a SecretObjectReference * Service when used to permit a BackendObjectReference",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the referent. When unspecified, this policy refers to all resources of the specified Group and Kind in the local namespace.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"group", "kind"},
+			},
+		},
 	}
 }
 
@@ -6521,14 +7112,14 @@ func schema_sigsk8sio_gateway_api_apis_v1_RouteNamespaces(ref common.ReferenceCa
 					"selector": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Selector must be specified when From is set to \"Selector\". In that case, only Routes in Namespaces matching this Selector will be selected by this Gateway. This field is ignored for other values of \"From\".\n\nSupport: Core",
-							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"),
+							Ref:         ref(v1.LabelSelector{}.OpenAPIModelName()),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"},
+			v1.LabelSelector{}.OpenAPIModelName()},
 	}
 }
 
@@ -6570,7 +7161,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_RouteParentStatus(ref common.Reference
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+										Ref:     ref(v1.Condition{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -6581,7 +7172,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_RouteParentStatus(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "sigs.k8s.io/gateway-api/apis/v1.ParentReference"},
+			v1.Condition{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ParentReference"},
 	}
 }
 
@@ -6777,7 +7368,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_TLSConfig(ref common.ReferenceCallback
 				Properties: map[string]spec.Schema{
 					"validation": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Validation holds configuration information for validating the frontend (client). Setting this field will result in mutual authentication when connecting to the gateway. In browsers this may result in a dialog appearing that requests a user to specify the client certificate. The maximum depth of a certificate chain accepted in verification is Implementation specific.\n\nSupport: Core\n\n<gateway:experimental>",
+							Description: "Validation holds configuration information for validating the frontend (client). Setting this field will result in mutual authentication when connecting to the gateway. In browsers this may result in a dialog appearing that requests a user to specify the client certificate. The maximum depth of a certificate chain accepted in verification is Implementation specific.\n\nSupport: Core",
 							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.FrontendTLSValidation"),
 						},
 					},
@@ -6797,7 +7388,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_TLSPortConfig(ref common.ReferenceCall
 				Properties: map[string]spec.Schema{
 					"port": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The Port indicates the Port Number to which the TLS configuration will be applied. This configuration will be applied to all Listeners handling HTTPS traffic that match this port.\n\nSupport: Core\n\n<gateway:experimental>",
+							Description: "The Port indicates the Port Number to which the TLS configuration will be applied. This configuration will be applied to all Listeners handling HTTPS traffic that match this port.\n\nSupport: Core",
 							Default:     0,
 							Type:        []string{"integer"},
 							Format:      "int32",
@@ -6805,7 +7396,7 @@ func schema_sigsk8sio_gateway_api_apis_v1_TLSPortConfig(ref common.ReferenceCall
 					},
 					"tls": {
 						SchemaProps: spec.SchemaProps{
-							Description: "TLS store the configuration that will be applied to all Listeners handling HTTPS traffic and matching given port.\n\nSupport: Core\n\n<gateway:experimental>",
+							Description: "TLS store the configuration that will be applied to all Listeners handling HTTPS traffic and matching given port.\n\nSupport: Core",
 							Default:     map[string]interface{}{},
 							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.TLSConfig"),
 						},
@@ -6816,6 +7407,263 @@ func schema_sigsk8sio_gateway_api_apis_v1_TLSPortConfig(ref common.ReferenceCall
 		},
 		Dependencies: []string{
 			"sigs.k8s.io/gateway-api/apis/v1.TLSConfig"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_TLSRoute(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "The TLSRoute resource is similar to TCPRoute, but can be configured to match against TLS-specific metadata. This allows more flexibility in matching streams for a given TLS listener.\n\nIf you need to forward traffic to a single target for a TLS listener, you could choose to use a TCPRoute with a TLS listener.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Spec defines the desired state of TLSRoute.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.TLSRouteSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Status defines the current state of TLSRoute.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.TLSRouteStatus"),
+						},
+					},
+				},
+				Required: []string{"spec"},
+			},
+		},
+		Dependencies: []string{
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.TLSRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.TLSRouteStatus"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_TLSRouteList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TLSRouteList contains a list of TLSRoute",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.TLSRoute"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.TLSRoute"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_TLSRouteRule(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TLSRouteRule is the configuration for a given rule.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the route rule. This name MUST be unique within a Route if it is set.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"backendRefs": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "BackendRefs defines the backend(s) where matching requests should be sent. If unspecified or invalid (refers to a nonexistent resource or a Service with no endpoints), the rule performs no forwarding; if no filters are specified that would result in a response being sent, the underlying implementation must actively reject request attempts to this backend, by rejecting the connection or returning a 500 status code. Request rejections must respect weight; if an invalid backend is requested to have 80% of requests, then 80% of requests must be rejected instead.\n\nSupport: Core for Kubernetes Service\n\nSupport: Extended for Kubernetes ServiceImport\n\nSupport: Implementation-specific for any other resource\n\nSupport for weight: Extended",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.BackendRef"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"backendRefs"},
+			},
+		},
+		Dependencies: []string{
+			"sigs.k8s.io/gateway-api/apis/v1.BackendRef"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_TLSRouteSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TLSRouteSpec defines the expected behavior of a TLSRoute. A TLSRoute MUST be attached to a Listener of protocol TLS. Core: The listener CAN be of type Passthrough Extended: The listener CAN be of type Terminate",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"parentRefs": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "ParentRefs references the resources (usually Gateways) that a Route wants to be attached to. Note that the referenced parent resource needs to allow this for the attachment to be complete. For Gateways, that means the Gateway needs to allow attachment from Routes of this kind and namespace. For Services, that means the Service must either be in the same namespace for a \"producer\" route, or the mesh implementation must support and allow \"consumer\" routes for the referenced Service. ReferenceGrant is not applicable for governing ParentRefs to Services - it is not possible to create a \"producer\" route for a Service in a different namespace from the Route.\n\nThere are two kinds of parent resources with \"Core\" support:\n\n* Gateway (Gateway conformance profile) * Service (Mesh conformance profile, ClusterIP Services only)\n\nThis API may be extended in the future to support additional kinds of parent resources.\n\nParentRefs must be _distinct_. This means either that:\n\n* They select different objects.  If this is the case, then parentRef\n  entries are distinct. In terms of fields, this means that the\n  multi-part key defined by `group`, `kind`, `namespace`, and `name` must\n  be unique across all parentRef entries in the Route.\n* They do not select different objects, but for each optional field used,\n  each ParentRef that selects the same object must set the same set of\n  optional fields to different values. If one ParentRef sets a\n  combination of optional fields, all must set the same combination.\n\nSome examples:\n\n* If one ParentRef sets `sectionName`, all ParentRefs referencing the\n  same object must also set `sectionName`.\n* If one ParentRef sets `port`, all ParentRefs referencing the same\n  object must also set `port`.\n* If one ParentRef sets `sectionName` and `port`, all ParentRefs\n  referencing the same object must also set `sectionName` and `port`.\n\nIt is possible to separately reference multiple distinct objects that may be collapsed by an implementation. For example, some implementations may choose to merge compatible Gateway Listeners together. If that is the case, the list of routes attached to those resources should also be merged.\n\nNote that for ParentRefs that cross namespace boundaries, there are specific rules. Cross-namespace references are only valid if they are explicitly allowed by something in the namespace they are referring to. For example, Gateway has the AllowedRoutes field, and ReferenceGrant provides a generic way to enable other kinds of cross-namespace reference.\n\n<gateway:experimental:description> ParentRefs from a Route to a Service in the same namespace are \"producer\" routes, which apply default routing rules to inbound connections from any namespace to the Service.\n\nParentRefs from a Route to a Service in a different namespace are \"consumer\" routes, and these routing rules are only applied to outbound connections originating from the same namespace as the Route, for which the intended destination of the connections are a Service targeted as a ParentRef of the Route. </gateway:experimental:description>\n\n<gateway:standard:validation:XValidation:message=\"sectionName must be specified when parentRefs includes 2 or more references to the same parent\",rule=\"self.all(p1, self.all(p2, p1.group == p2.group && p1.kind == p2.kind && p1.name == p2.name && (((!has(p1.__namespace__) || p1.__namespace__ == '') && (!has(p2.__namespace__) || p2.__namespace__ == '')) || (has(p1.__namespace__) && has(p2.__namespace__) && p1.__namespace__ == p2.__namespace__ )) ? ((!has(p1.sectionName) || p1.sectionName == '') == (!has(p2.sectionName) || p2.sectionName == '')) : true))\"> <gateway:standard:validation:XValidation:message=\"sectionName must be unique when parentRefs includes 2 or more references to the same parent\",rule=\"self.all(p1, self.exists_one(p2, p1.group == p2.group && p1.kind == p2.kind && p1.name == p2.name && (((!has(p1.__namespace__) || p1.__namespace__ == '') && (!has(p2.__namespace__) || p2.__namespace__ == '')) || (has(p1.__namespace__) && has(p2.__namespace__) && p1.__namespace__ == p2.__namespace__ )) && (((!has(p1.sectionName) || p1.sectionName == '') && (!has(p2.sectionName) || p2.sectionName == '')) || (has(p1.sectionName) && has(p2.sectionName) && p1.sectionName == p2.sectionName))))\"> <gateway:experimental:validation:XValidation:message=\"sectionName or port must be specified when parentRefs includes 2 or more references to the same parent\",rule=\"self.all(p1, self.all(p2, p1.group == p2.group && p1.kind == p2.kind && p1.name == p2.name && (((!has(p1.__namespace__) || p1.__namespace__ == '') && (!has(p2.__namespace__) || p2.__namespace__ == '')) || (has(p1.__namespace__) && has(p2.__namespace__) && p1.__namespace__ == p2.__namespace__)) ? ((!has(p1.sectionName) || p1.sectionName == '') == (!has(p2.sectionName) || p2.sectionName == '') && (!has(p1.port) || p1.port == 0) == (!has(p2.port) || p2.port == 0)): true))\"> <gateway:experimental:validation:XValidation:message=\"sectionName or port must be unique when parentRefs includes 2 or more references to the same parent\",rule=\"self.all(p1, self.exists_one(p2, p1.group == p2.group && p1.kind == p2.kind && p1.name == p2.name && (((!has(p1.__namespace__) || p1.__namespace__ == '') && (!has(p2.__namespace__) || p2.__namespace__ == '')) || (has(p1.__namespace__) && has(p2.__namespace__) && p1.__namespace__ == p2.__namespace__ )) && (((!has(p1.sectionName) || p1.sectionName == '') && (!has(p2.sectionName) || p2.sectionName == '')) || ( has(p1.sectionName) && has(p2.sectionName) && p1.sectionName == p2.sectionName)) && (((!has(p1.port) || p1.port == 0) && (!has(p2.port) || p2.port == 0)) || (has(p1.port) && has(p2.port) && p1.port == p2.port))))\">",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.ParentReference"),
+									},
+								},
+							},
+						},
+					},
+					"useDefaultGateways": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UseDefaultGateways indicates the default Gateway scope to use for this Route. If unset (the default) or set to None, the Route will not be attached to any default Gateway; if set, it will be attached to any default Gateway supporting the named scope, subject to the usual rules about which Routes a Gateway is allowed to claim.\n\nThink carefully before using this functionality! The set of default Gateways supporting the requested scope can change over time without any notice to the Route author, and in many situations it will not be appropriate to request a default Gateway for a given Route -- for example, a Route with specific security requirements should almost certainly not use a default Gateway.\n\n<gateway:experimental>",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"hostnames": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Hostnames defines a set of SNI hostnames that should match against the SNI attribute of TLS ClientHello message in TLS handshake. This matches the RFC 1123 definition of a hostname with 2 notable exceptions:\n\n1. IPs are not allowed in SNI hostnames per RFC 6066. 2. A hostname may be prefixed with a wildcard label (`*.`). The wildcard\n   label must appear by itself as the first label.\n\n<gateway:util:excludeFromCRD> If a hostname is specified by both the Listener and TLSRoute, there must be at least one intersecting hostname for the TLSRoute to be attached to the Listener. For example:\n\n* A Listener with `test.example.com` as the hostname matches TLSRoutes\n  that have specified at least one of `test.example.com` or\n  `*.example.com`.\n* A Listener with `*.example.com` as the hostname matches TLSRoutes\n  that have specified at least one hostname that matches the Listener\n  hostname. For example, `test.example.com` and `*.example.com` would both\n  match. On the other hand, `example.com` and `test.example.net` would not\n  match.\n* A listener with `something.example.com` as the hostname matches a\n  TLSRoute with hostname `*.example.com`.\n\nIf both the Listener and TLSRoute have specified hostnames, any TLSRoute hostnames that do not match any Listener hostname MUST be ignored. For example, if a Listener specified `*.example.com`, and the TLSRoute specified `test.example.com` and `test.example.net`, `test.example.net` must not be considered for a match.\n\nIf both the Listener and TLSRoute have specified hostnames, and none match with the criteria above, then the TLSRoute is not accepted for that Listener. If the TLSRoute does not match any Listener on its parent, the implementation must raise an 'Accepted' Condition with a status of `False` in the corresponding RouteParentStatus.\n\nA Listener MUST be have protocol set to TLS when a TLSRoute attaches to it. The implementation MUST raise an 'Accepted' Condition with a status of `False` in the corresponding RouteParentStatus with the reason of \"UnsupportedValue\" in case a Listener of the wrong type is used. Core: Listener with `protocol` `TLS` and `tls.mode` `Passthrough`. Extended: Listener with `protocol` `TLS` and `tls.mode` `Terminate`. The feature name for this Extended feature is `TLSRouteTermination`. </gateway:util:excludeFromCRD>",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"rules": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Rules are a list of actions.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.TLSRouteRule"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"hostnames", "rules"},
+			},
+		},
+		Dependencies: []string{
+			"sigs.k8s.io/gateway-api/apis/v1.ParentReference", "sigs.k8s.io/gateway-api/apis/v1.TLSRouteRule"},
+	}
+}
+
+func schema_sigsk8sio_gateway_api_apis_v1_TLSRouteStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "TLSRouteStatus defines the observed state of TLSRoute",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"parents": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Parents is a list of parent resources (usually Gateways) that are associated with the route, and the status of the route with respect to each parent. When this route attaches to a parent, the controller that manages the parent must add an entry to this list when the controller first sees the route and should update the entry as appropriate when the route or gateway is modified.\n\nNote that parent references that cannot be resolved by an implementation of this API will not be added to this list. Implementations of this API can only populate Route status for the Gateways/parent resources they are responsible for.\n\nA maximum of 32 Gateways will be represented in this list. An empty list means the route has not been attached to any Gateway.\n\n<gateway:util:excludeFromCRD> Notes for implementors:\n\nWhile parents is not a listType `map`, this is due to the fact that the list key is not scalar, and Kubernetes is unable to represent this.\n\nParent status MUST be considered to be namespaced by the combination of the parentRef and controllerName fields, and implementations should keep the following rules in mind when updating this status:\n\n* Implementations MUST update only entries that have a matching value of\n  `controllerName` for that implementation.\n* Implementations MUST NOT update entries with non-matching `controllerName`\n  fields.\n* Implementations MUST treat each `parentRef`` in the Route separately and\n  update its status based on the relationship with that parent.\n* Implementations MUST perform a read-modify-write cycle on this field\n  before modifying it. That is, when modifying this field, implementations\n  must be confident they have fetched the most recent version of this field,\n  and ensure that changes they make are on that recent version.\n\n</gateway:util:excludeFromCRD>",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.RouteParentStatus"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"parents"},
+			},
+		},
+		Dependencies: []string{
+			"sigs.k8s.io/gateway-api/apis/v1.RouteParentStatus"},
 	}
 }
 
@@ -6863,7 +7711,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_GRPCRoute(ref common.ReferenceCa
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -6885,7 +7733,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_GRPCRoute(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.GRPCRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.GRPCRouteStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.GRPCRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.GRPCRouteStatus"},
 	}
 }
 
@@ -6912,7 +7760,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_GRPCRouteList(ref common.Referen
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -6933,7 +7781,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_GRPCRouteList(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1alpha2.GRPCRoute"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha2.GRPCRoute"},
 	}
 }
 
@@ -7099,7 +7947,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_PolicyAncestorStatus(ref common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+										Ref:     ref(v1.Condition{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -7110,7 +7958,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_PolicyAncestorStatus(ref common.
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "sigs.k8s.io/gateway-api/apis/v1.ParentReference"},
+			v1.Condition{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ParentReference"},
 	}
 }
 
@@ -7172,21 +8020,21 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_ReferenceGrant(ref common.Refere
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Spec defines the desired state of ReferenceGrant.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantSpec"),
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantSpec"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantSpec"},
 	}
 }
 
@@ -7214,7 +8062,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_ReferenceGrantList(ref common.Re
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -7235,7 +8083,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_ReferenceGrantList(ref common.Re
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1alpha2.ReferenceGrant"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha2.ReferenceGrant"},
 	}
 }
 
@@ -7263,7 +8111,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TCPRoute(ref common.ReferenceCal
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -7285,7 +8133,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TCPRoute(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1alpha2.TCPRouteSpec", "sigs.k8s.io/gateway-api/apis/v1alpha2.TCPRouteStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha2.TCPRouteSpec", "sigs.k8s.io/gateway-api/apis/v1alpha2.TCPRouteStatus"},
 	}
 }
 
@@ -7313,7 +8161,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TCPRouteList(ref common.Referenc
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -7334,7 +8182,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TCPRouteList(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1alpha2.TCPRoute"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha2.TCPRoute"},
 	}
 }
 
@@ -7480,7 +8328,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TLSRoute(ref common.ReferenceCal
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
-				Description: "The TLSRoute resource is similar to TCPRoute, but can be configured to match against TLS-specific metadata. This allows more flexibility in matching streams for a given TLS listener.\n\nIf you need to forward traffic to a single target for a TLS listener, you could choose to use a TCPRoute with a TLS listener.",
+				Description: "The TLSRoute resource is similar to TCPRoute, but can be configured to match against TLS-specific metadata. This allows more flexibility in matching streams for a given TLS listener.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
 					"kind": {
@@ -7500,7 +8348,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TLSRoute(ref common.ReferenceCal
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -7522,7 +8370,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TLSRoute(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRouteSpec", "sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRouteStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRouteSpec", "sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRouteStatus"},
 	}
 }
 
@@ -7550,7 +8398,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TLSRouteList(ref common.Referenc
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -7571,7 +8419,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TLSRouteList(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRoute"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRoute"},
 	}
 }
 
@@ -7584,7 +8432,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_TLSRouteRule(ref common.Referenc
 				Properties: map[string]spec.Schema{
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the route rule. This name MUST be unique within a Route if it is set.\n\nSupport: Extended",
+							Description: "Name is the name of the route rule. This name MUST be unique within a Route if it is set.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -7757,7 +8605,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_UDPRoute(ref common.ReferenceCal
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -7779,7 +8627,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_UDPRoute(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1alpha2.UDPRouteSpec", "sigs.k8s.io/gateway-api/apis/v1alpha2.UDPRouteStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha2.UDPRouteSpec", "sigs.k8s.io/gateway-api/apis/v1alpha2.UDPRouteStatus"},
 	}
 }
 
@@ -7807,7 +8655,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_UDPRouteList(ref common.Referenc
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -7828,7 +8676,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha2_UDPRouteList(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1alpha2.UDPRoute"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha2.UDPRoute"},
 	}
 }
 
@@ -7993,7 +8841,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_BackendTLSPolicy(ref common.Refe
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -8015,7 +8863,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_BackendTLSPolicy(ref common.Refe
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.BackendTLSPolicySpec", "sigs.k8s.io/gateway-api/apis/v1.PolicyStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.BackendTLSPolicySpec", "sigs.k8s.io/gateway-api/apis/v1.PolicyStatus"},
 	}
 }
 
@@ -8042,7 +8890,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_BackendTLSPolicyList(ref common.
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -8063,7 +8911,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_BackendTLSPolicyList(ref common.
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1alpha3.BackendTLSPolicy"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha3.BackendTLSPolicy"},
 	}
 }
 
@@ -8091,21 +8939,21 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_TLSRoute(ref common.ReferenceCal
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Spec defines the desired state of TLSRoute.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1alpha3.TLSRouteSpec"),
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.TLSRouteSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Status defines the current state of TLSRoute.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRouteStatus"),
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.TLSRouteStatus"),
 						},
 					},
 				},
@@ -8113,7 +8961,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_TLSRoute(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRouteStatus", "sigs.k8s.io/gateway-api/apis/v1alpha3.TLSRouteSpec"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.TLSRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.TLSRouteStatus"},
 	}
 }
 
@@ -8141,7 +8989,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_TLSRouteList(ref common.Referenc
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -8162,7 +9010,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_TLSRouteList(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1alpha3.TLSRoute"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1alpha3.TLSRoute"},
 	}
 }
 
@@ -8206,7 +9054,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_TLSRouteSpec(ref common.Referenc
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "Hostnames defines a set of SNI hostnames that should match against the SNI attribute of TLS ClientHello message in TLS handshake. This matches the RFC 1123 definition of a hostname with 2 notable exceptions:\n\n1. IPs are not allowed in SNI hostnames per RFC 6066. 2. A hostname may be prefixed with a wildcard label (`*.`). The wildcard\n   label must appear by itself as the first label.\n\nIf a hostname is specified by both the Listener and TLSRoute, there must be at least one intersecting hostname for the TLSRoute to be attached to the Listener. For example:\n\n* A Listener with `test.example.com` as the hostname matches TLSRoutes\n  that have specified at least one of `test.example.com` or\n  `*.example.com`.\n* A Listener with `*.example.com` as the hostname matches TLSRoutes\n  that have specified at least one hostname that matches the Listener\n  hostname. For example, `test.example.com` and `*.example.com` would both\n  match. On the other hand, `example.com` and `test.example.net` would not\n  match.\n\nIf both the Listener and TLSRoute have specified hostnames, any TLSRoute hostnames that do not match the Listener hostname MUST be ignored. For example, if a Listener specified `*.example.com`, and the TLSRoute specified `test.example.com` and `test.example.net`, `test.example.net` must not be considered for a match.\n\nIf both the Listener and TLSRoute have specified hostnames, and none match with the criteria above, then the TLSRoute is not accepted. The implementation must raise an 'Accepted' Condition with a status of `False` in the corresponding RouteParentStatus.\n\nSupport: Core",
+							Description: "Hostnames defines a set of SNI hostnames that should match against the SNI attribute of TLS ClientHello message in TLS handshake. This matches the RFC 1123 definition of a hostname with 2 notable exceptions:\n\n1. IPs are not allowed in SNI hostnames per RFC 6066. 2. A hostname may be prefixed with a wildcard label (`*.`). The wildcard\n   label must appear by itself as the first label.\n\n<gateway:util:excludeFromCRD> If a hostname is specified by both the Listener and TLSRoute, there must be at least one intersecting hostname for the TLSRoute to be attached to the Listener. For example:\n\n* A Listener with `test.example.com` as the hostname matches TLSRoutes\n  that have specified at least one of `test.example.com` or\n  `*.example.com`.\n* A Listener with `*.example.com` as the hostname matches TLSRoutes\n  that have specified at least one hostname that matches the Listener\n  hostname. For example, `test.example.com` and `*.example.com` would both\n  match. On the other hand, `example.com` and `test.example.net` would not\n  match.\n* A listener with `something.example.com` as the hostname matches a\n  TLSRoute with hostname `*.example.com`.\n\nIf both the Listener and TLSRoute have specified hostnames, any TLSRoute hostnames that do not match any Listener hostname MUST be ignored. For example, if a Listener specified `*.example.com`, and the TLSRoute specified `test.example.com` and `test.example.net`, `test.example.net` must not be considered for a match.\n\nIf both the Listener and TLSRoute have specified hostnames, and none match with the criteria above, then the TLSRoute is not accepted for that Listener. If the TLSRoute does not match any Listener on its parent, the implementation must raise an 'Accepted' Condition with a status of `False` in the corresponding RouteParentStatus.\n\nA Listener MUST be have protocol set to TLS when a TLSRoute attaches to it. The implementation MUST raise an 'Accepted' Condition with a status of `False` in the corresponding RouteParentStatus with the reason of \"UnsupportedValue\" in case a Listener of the wrong type is used. Core: Listener with `protocol` `TLS` and `tls.mode` `Passthrough`. Extended: Listener with `protocol` `TLS` and `tls.mode` `Terminate`. The feature name for this Extended feature is `TLSRouteTermination`. </gateway:util:excludeFromCRD>",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
@@ -8226,13 +9074,13 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_TLSRouteSpec(ref common.Referenc
 							},
 						},
 						SchemaProps: spec.SchemaProps{
-							Description: "Rules are a list of actions.\n\n<gateway:experimental:validation:XValidation:message=\"Rule name must be unique within the route\",rule=\"self.all(l1, !has(l1.name) || self.exists_one(l2, has(l2.name) && l1.name == l2.name))\">",
+							Description: "Rules are a list of actions.",
 							Type:        []string{"array"},
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRouteRule"),
+										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.TLSRouteRule"),
 									},
 								},
 							},
@@ -8243,7 +9091,7 @@ func schema_sigsk8sio_gateway_api_apis_v1alpha3_TLSRouteSpec(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"sigs.k8s.io/gateway-api/apis/v1.ParentReference", "sigs.k8s.io/gateway-api/apis/v1alpha2.TLSRouteRule"},
+			"sigs.k8s.io/gateway-api/apis/v1.ParentReference", "sigs.k8s.io/gateway-api/apis/v1.TLSRouteRule"},
 	}
 }
 
@@ -8271,7 +9119,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_Gateway(ref common.ReferenceCallb
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -8293,7 +9141,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_Gateway(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.GatewaySpec", "sigs.k8s.io/gateway-api/apis/v1.GatewayStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.GatewaySpec", "sigs.k8s.io/gateway-api/apis/v1.GatewayStatus"},
 	}
 }
 
@@ -8321,7 +9169,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_GatewayClass(ref common.Reference
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -8343,7 +9191,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_GatewayClass(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.GatewayClassSpec", "sigs.k8s.io/gateway-api/apis/v1.GatewayClassStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.GatewayClassSpec", "sigs.k8s.io/gateway-api/apis/v1.GatewayClassStatus"},
 	}
 }
 
@@ -8371,7 +9219,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_GatewayClassList(ref common.Refer
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -8392,7 +9240,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_GatewayClassList(ref common.Refer
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1beta1.GatewayClass"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1beta1.GatewayClass"},
 	}
 }
 
@@ -8420,7 +9268,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_GatewayList(ref common.ReferenceC
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -8441,7 +9289,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_GatewayList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1beta1.Gateway"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1beta1.Gateway"},
 	}
 }
 
@@ -8469,7 +9317,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_HTTPRoute(ref common.ReferenceCal
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -8491,7 +9339,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_HTTPRoute(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.HTTPRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.HTTPRouteStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.HTTPRouteSpec", "sigs.k8s.io/gateway-api/apis/v1.HTTPRouteStatus"},
 	}
 }
 
@@ -8519,7 +9367,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_HTTPRouteList(ref common.Referenc
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -8540,7 +9388,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_HTTPRouteList(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1beta1.HTTPRoute"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1beta1.HTTPRoute"},
 	}
 }
 
@@ -8568,59 +9416,21 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrant(ref common.Referen
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Spec defines the desired state of ReferenceGrant.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantSpec"),
+							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantSpec"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantSpec"},
-	}
-}
-
-func schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrantFrom(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ReferenceGrantFrom describes trusted namespaces and kinds.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"group": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Group is the group of the referent. When empty, the Kubernetes core API group is inferred.\n\nSupport: Core",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is the kind of the referent. Although implementations may support additional resources, the following types are part of the \"Core\" support level for this field.\n\nWhen used to permit a SecretObjectReference:\n\n* Gateway\n\nWhen used to permit a BackendObjectReference:\n\n* GRPCRoute * HTTPRoute * TCPRoute * TLSRoute * UDPRoute",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"namespace": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Namespace is the namespace of the referent.\n\nSupport: Core",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"group", "kind", "namespace"},
-			},
-		},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.ReferenceGrantSpec"},
 	}
 }
 
@@ -8648,7 +9458,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrantList(ref common.Ref
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -8669,98 +9479,7 @@ func schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrantList(ref common.Ref
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrant"},
-	}
-}
-
-func schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrantSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ReferenceGrantSpec identifies a cross namespace relationship that is trusted for Gateway API.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"from": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-list-type": "atomic",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "From describes the trusted namespaces and kinds that can reference the resources described in \"To\". Each entry in this list MUST be considered to be an additional place that references can be valid from, or to put this another way, entries MUST be combined using OR.\n\nSupport: Core",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantFrom"),
-									},
-								},
-							},
-						},
-					},
-					"to": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-list-type": "atomic",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "To describes the resources that may be referenced by the resources described in \"From\". Each entry in this list MUST be considered to be an additional place that references can be valid to, or to put this another way, entries MUST be combined using OR.\n\nSupport: Core",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantTo"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"from", "to"},
-			},
-		},
-		Dependencies: []string{
-			"sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantFrom", "sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrantTo"},
-	}
-}
-
-func schema_sigsk8sio_gateway_api_apis_v1beta1_ReferenceGrantTo(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ReferenceGrantTo describes what Kinds are allowed as targets of the references.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"group": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Group is the group of the referent. When empty, the Kubernetes core API group is inferred.\n\nSupport: Core",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is the kind of the referent. Although implementations may support additional resources, the following types are part of the \"Core\" support level for this field:\n\n* Secret when used to permit a SecretObjectReference * Service when used to permit a BackendObjectReference",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the referent. When unspecified, this policy refers to all resources of the specified Group and Kind in the local namespace.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"group", "kind"},
-			},
-		},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1beta1.ReferenceGrant"},
 	}
 }
 
@@ -8843,247 +9562,6 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_BudgetDetails(ref common.Refere
 	}
 }
 
-func schema_sigsk8sio_gateway_api_apisx_v1alpha1_ListenerEntry(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the Listener. This name MUST be unique within a ListenerSet.\n\nName is not required to be unique across a Gateway and ListenerSets. Routes can attach to a Listener by having a ListenerSet as a parentRef and setting the SectionName",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"hostname": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Hostname specifies the virtual hostname to match for protocol types that define this concept. When unspecified, all hostnames are matched. This field is ignored for protocols that don't require hostname based matching.\n\nImplementations MUST apply Hostname matching appropriately for each of the following protocols:\n\n* TLS: The Listener Hostname MUST match the SNI. * HTTP: The Listener Hostname MUST match the Host header of the request. * HTTPS: The Listener Hostname SHOULD match at both the TLS and HTTP\n  protocol layers as described above. If an implementation does not\n  ensure that both the SNI and Host header match the Listener hostname,\n  it MUST clearly document that.\n\nFor HTTPRoute and TLSRoute resources, there is an interaction with the `spec.hostnames` array. When both listener and route specify hostnames, there MUST be an intersection between the values for a Route to be accepted. For more information, refer to the Route specific Hostnames documentation.\n\nHostnames that are prefixed with a wildcard label (`*.`) are interpreted as a suffix match. That means that a match for `*.example.com` would match both `test.example.com`, and `foo.test.example.com`, but not `example.com`.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"port": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Port is the network port. Multiple listeners may use the same port, subject to the Listener compatibility rules.\n\nIf the port is not set or specified as zero, the implementation will assign a unique port. If the implementation does not support dynamic port assignment, it MUST set `Accepted` condition to `False` with the `UnsupportedPort` reason.",
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"protocol": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Protocol specifies the network protocol this listener expects to receive.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"tls": {
-						SchemaProps: spec.SchemaProps{
-							Description: "TLS is the TLS configuration for the Listener. This field is required if the Protocol field is \"HTTPS\" or \"TLS\". It is invalid to set this field if the Protocol field is \"HTTP\", \"TCP\", or \"UDP\".\n\nThe association of SNIs to Certificate defined in ListenerTLSConfig is defined based on the Hostname field for this listener.\n\nThe GatewayClass MUST use the longest matching SNI out of all available certificates for any TLS handshake.",
-							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.ListenerTLSConfig"),
-						},
-					},
-					"allowedRoutes": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AllowedRoutes defines the types of routes that MAY be attached to a Listener and the trusted namespaces where those Route resources MAY be present.\n\nAlthough a client request may match multiple route rules, only one rule may ultimately receive the request. Matching precedence MUST be determined in order of the following criteria:\n\n* The most specific match as defined by the Route type. * The oldest Route based on creation timestamp. For example, a Route with\n  a creation timestamp of \"2020-09-08 01:02:03\" is given precedence over\n  a Route with a creation timestamp of \"2020-09-08 01:02:04\".\n* If everything else is equivalent, the Route appearing first in\n  alphabetical order (namespace/name) should be given precedence. For\n  example, foo/bar is given precedence over foo/baz.\n\nAll valid rules within a Route attached to this Listener should be implemented. Invalid Route rules can be ignored (sometimes that will mean the full Route). If a Route rule transitions from valid to invalid, support for that Route rule should be dropped to ensure consistency. For example, even if a filter specified by a Route rule is invalid, the rest of the rules within that Route should still be supported.",
-							Ref:         ref("sigs.k8s.io/gateway-api/apis/v1.AllowedRoutes"),
-						},
-					},
-				},
-				Required: []string{"name", "protocol"},
-			},
-		},
-		Dependencies: []string{
-			"sigs.k8s.io/gateway-api/apis/v1.AllowedRoutes", "sigs.k8s.io/gateway-api/apis/v1.ListenerTLSConfig"},
-	}
-}
-
-func schema_sigsk8sio_gateway_api_apisx_v1alpha1_ListenerEntryStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ListenerStatus is the status associated with a Listener.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the Listener that this status corresponds to.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"port": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Port is the network port the listener is configured to listen on.",
-							Default:     0,
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"supportedKinds": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-list-type": "atomic",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "SupportedKinds is the list indicating the Kinds supported by this listener. This MUST represent the kinds supported by an implementation for that Listener configuration.\n\nIf kinds are specified in Spec that are not supported, they MUST NOT appear in this list and an implementation MUST set the \"ResolvedRefs\" condition to \"False\" with the \"InvalidRouteKinds\" reason. If both valid and invalid Route kinds are specified, the implementation MUST reference the valid Route kinds that have been specified.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("sigs.k8s.io/gateway-api/apis/v1.RouteGroupKind"),
-									},
-								},
-							},
-						},
-					},
-					"attachedRoutes": {
-						SchemaProps: spec.SchemaProps{
-							Description: "AttachedRoutes represents the total number of Routes that have been successfully attached to this Listener.\n\nSuccessful attachment of a Route to a Listener is based solely on the combination of the AllowedRoutes field on the corresponding Listener and the Route's ParentRefs field. A Route is successfully attached to a Listener when it is selected by the Listener's AllowedRoutes field AND the Route has a valid ParentRef selecting the whole Gateway resource or a specific Listener as a parent resource (more detail on attachment semantics can be found in the documentation on the various Route kinds ParentRefs fields). Listener status does not impact successful attachment, i.e. the AttachedRoutes field count MUST be set for Listeners, even if the Accepted condition of an individual Listener is set to \"False\". The AttachedRoutes number represents the number of Routes with the Accepted condition set to \"True\" that have been attached to this Listener. Routes with any other value for the Accepted condition MUST NOT be included in this count.\n\nUses for this field include troubleshooting Route attachment and measuring blast radius/impact of changes to a Listener.",
-							Default:     0,
-							Type:        []string{"integer"},
-							Format:      "int32",
-						},
-					},
-					"conditions": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-list-map-keys": []interface{}{
-									"type",
-								},
-								"x-kubernetes-list-type": "map",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "Conditions describe the current condition of this listener.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"name", "port", "supportedKinds", "attachedRoutes", "conditions"},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "sigs.k8s.io/gateway-api/apis/v1.RouteGroupKind"},
-	}
-}
-
-func schema_sigsk8sio_gateway_api_apisx_v1alpha1_ListenerSetSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ListenerSetSpec defines the desired state of a ListenerSet.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"parentRef": {
-						SchemaProps: spec.SchemaProps{
-							Description: "ParentRef references the Gateway that the listeners are attached to.",
-							Default:     map[string]interface{}{},
-							Ref:         ref("sigs.k8s.io/gateway-api/apisx/v1alpha1.ParentGatewayReference"),
-						},
-					},
-					"listeners": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-list-map-keys": []interface{}{
-									"name",
-								},
-								"x-kubernetes-list-type": "map",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "Listeners associated with this ListenerSet. Listeners define logical endpoints that are bound on this referenced parent Gateway's addresses.\n\nListeners in a `Gateway` and their attached `ListenerSets` are concatenated as a list when programming the underlying infrastructure. Each listener name does not need to be unique across the Gateway and ListenerSets. See ListenerEntry.Name for more details.\n\nImplementations MUST treat the parent Gateway as having the merged list of all listeners from itself and attached ListenerSets using the following precedence:\n\n1. \"parent\" Gateway 2. ListenerSet ordered by creation time (oldest first) 3. ListenerSet ordered alphabetically by \"{namespace}/{name}\".\n\nAn implementation MAY reject listeners by setting the ListenerEntryStatus `Accepted` condition to False with the Reason `TooManyListeners`\n\nIf a listener has a conflict, this will be reported in the Status.ListenerEntryStatus setting the `Conflicted` condition to True.\n\nImplementations SHOULD be cautious about what information from the parent or siblings are reported to avoid accidentally leaking sensitive information that the child would not otherwise have access to. This can include contents of secrets etc.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerEntry"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"parentRef", "listeners"},
-			},
-		},
-		Dependencies: []string{
-			"sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerEntry", "sigs.k8s.io/gateway-api/apisx/v1alpha1.ParentGatewayReference"},
-	}
-}
-
-func schema_sigsk8sio_gateway_api_apisx_v1alpha1_ListenerSetStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"conditions": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-list-map-keys": []interface{}{
-									"type",
-								},
-								"x-kubernetes-list-type": "map",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "Conditions describe the current conditions of the ListenerSet.\n\nImplementations MUST express ListenerSet conditions using the `ListenerSetConditionType` and `ListenerSetConditionReason` constants so that operators and tools can converge on a common vocabulary to describe ListenerSet state.\n\nKnown condition types are:\n\n* \"Accepted\" * \"Programmed\"",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
-									},
-								},
-							},
-						},
-					},
-					"listeners": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-list-map-keys": []interface{}{
-									"name",
-								},
-								"x-kubernetes-list-type": "map",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Description: "Listeners provide status for each unique listener port defined in the Spec.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerEntryStatus"),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerEntryStatus"},
-	}
-}
-
 func schema_sigsk8sio_gateway_api_apisx_v1alpha1_MeshSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -9094,7 +9572,6 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_MeshSpec(ref common.ReferenceCa
 					"controllerName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ControllerName is the name of a controller that is managing Gateway API resources for mesh traffic management. The value of this field MUST be a domain prefixed path.\n\nExample: \"example.com/awesome-mesh\".\n\nThis field is not mutable and cannot be empty.\n\nSupport: Core",
-							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -9144,7 +9621,7 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_MeshStatus(ref common.Reference
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+										Ref:     ref(v1.Condition{}.OpenAPIModelName()),
 									},
 								},
 							},
@@ -9175,50 +9652,7 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_MeshStatus(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "sigs.k8s.io/gateway-api/apis/v1.SupportedFeature"},
-	}
-}
-
-func schema_sigsk8sio_gateway_api_apisx_v1alpha1_ParentGatewayReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "ParentGatewayReference identifies an API object including its namespace, defaulting to Gateway.",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"group": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Group is the group of the referent.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is kind of the referent. For example \"Gateway\".",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name is the name of the referent.",
-							Default:     "",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"namespace": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Namespace is the namespace of the referent.  If not present, the namespace of the referent is assumed to be the same as the namespace of the referring object.",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
-				Required: []string{"name"},
-			},
-		},
+			v1.Condition{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.SupportedFeature"},
 	}
 }
 
@@ -9300,7 +9734,7 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XBackendTrafficPolicy(ref commo
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -9322,7 +9756,7 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XBackendTrafficPolicy(ref commo
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apis/v1.PolicyStatus", "sigs.k8s.io/gateway-api/apisx/v1alpha1.BackendTrafficPolicySpec"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apis/v1.PolicyStatus", "sigs.k8s.io/gateway-api/apisx/v1alpha1.BackendTrafficPolicySpec"},
 	}
 }
 
@@ -9350,7 +9784,7 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XBackendTrafficPolicyList(ref c
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -9371,105 +9805,7 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XBackendTrafficPolicyList(ref c
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apisx/v1alpha1.XBackendTrafficPolicy"},
-	}
-}
-
-func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XListenerSet(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Description: "XListenerSet defines a set of additional listeners to attach to an existing Gateway. This resource provides a mechanism to merge multiple listeners into a single Gateway.\n\nThe parent Gateway must explicitly allow ListenerSet attachment through its AllowedListeners configuration. By default, Gateways do not allow ListenerSet attachment.\n\nRoutes can attach to a ListenerSet by specifying it as a parentRef, and can optionally target specific listeners using the sectionName field.\n\nPolicy Attachment: - Policies that attach to a ListenerSet apply to all listeners defined in that resource - Policies do not impact listeners in the parent Gateway - Different ListenerSets attached to the same Gateway can have different policies - If an implementation cannot apply a policy to specific listeners, it should reject the policy\n\nReferenceGrant Semantics: - ReferenceGrants applied to a Gateway are not inherited by child ListenerSets - ReferenceGrants applied to a ListenerSet do not grant permission to the parent Gateway's listeners - A ListenerSet can reference secrets/backends in its own namespace without a ReferenceGrant\n\nGateway Integration:\n  - The parent Gateway's status will include \"AttachedListenerSets\"\n    which is the count of ListenerSets that have successfully attached to a Gateway\n    A ListenerSet is successfully attached to a Gateway when all the following conditions are met:\n  - The ListenerSet is selected by the Gateway's AllowedListeners field\n  - The ListenerSet has a valid ParentRef selecting the Gateway\n  - The ListenerSet's status has the condition \"Accepted: true\"",
-				Type:        []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
-						},
-					},
-					"spec": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Spec defines the desired state of ListenerSet.",
-							Default:     map[string]interface{}{},
-							Ref:         ref("sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerSetSpec"),
-						},
-					},
-					"status": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Status defines the current state of ListenerSet.",
-							Default:     map[string]interface{}{},
-							Ref:         ref("sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerSetStatus"),
-						},
-					},
-				},
-				Required: []string{"spec"},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerSetSpec", "sigs.k8s.io/gateway-api/apisx/v1alpha1.ListenerSetStatus"},
-	}
-}
-
-func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XListenerSetList(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"kind": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"apiVersion": {
-						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"metadata": {
-						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
-						},
-					},
-					"items": {
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Default: map[string]interface{}{},
-										Ref:     ref("sigs.k8s.io/gateway-api/apisx/v1alpha1.XListenerSet"),
-									},
-								},
-							},
-						},
-					},
-				},
-				Required: []string{"items"},
-			},
-		},
-		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apisx/v1alpha1.XListenerSet"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apisx/v1alpha1.XBackendTrafficPolicy"},
 	}
 }
 
@@ -9497,7 +9833,7 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XMesh(ref common.ReferenceCallb
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+							Ref:     ref(v1.ObjectMeta{}.OpenAPIModelName()),
 						},
 					},
 					"spec": {
@@ -9519,7 +9855,7 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XMesh(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "sigs.k8s.io/gateway-api/apisx/v1alpha1.MeshSpec", "sigs.k8s.io/gateway-api/apisx/v1alpha1.MeshStatus"},
+			v1.ObjectMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apisx/v1alpha1.MeshSpec", "sigs.k8s.io/gateway-api/apisx/v1alpha1.MeshStatus"},
 	}
 }
 
@@ -9546,7 +9882,7 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XMeshList(ref common.ReferenceC
 					"metadata": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+							Ref:     ref(v1.ListMeta{}.OpenAPIModelName()),
 						},
 					},
 					"items": {
@@ -9567,6 +9903,6 @@ func schema_sigsk8sio_gateway_api_apisx_v1alpha1_XMeshList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/gateway-api/apisx/v1alpha1.XMesh"},
+			v1.ListMeta{}.OpenAPIModelName(), "sigs.k8s.io/gateway-api/apisx/v1alpha1.XMesh"},
 	}
 }
