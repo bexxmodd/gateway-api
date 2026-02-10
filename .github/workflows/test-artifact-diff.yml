@@ -1,3 +1,7 @@
+# Verify that release artifacts (standard-install.yaml) match the source at the release tag.
+# Catches cases where the release pipeline was run from a commit ahead of the tagged commit.
+# See: https://github.com/kubernetes-sigs/gateway-api/issues/4490
+
 name: Verify Release Artifacts
 
 on:
@@ -53,6 +57,7 @@ jobs:
           # B) Always get source from the Git archive at this exact tag (never from release assets)
           # so we build from the same version we are verifying
           curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
+          curl -sSfL -o source.tar.gz "https://github.com/kubernetes-sigs/gateway-api/archive/refs/tags/v1.4.0.tar.gz"
           tar --extract --gunzip --file source.tar.gz
           cd gateway-api-*
           echo "Building standard-install.yaml from source at tag $TAG (same version)..."
@@ -68,7 +73,6 @@ jobs:
           if ! diff -u /tmp/release.yaml /tmp/built.yaml; then
             echo ""
             echo "::error::Release $TAG: standard-install.yaml in the release does not match the source at tag $TAG."
-            echo "The release artifact may have been built from a different commit (e.g. main ahead of the tag). See https://github.com/kubernetes-sigs/gateway-api/issues/4490"
             exit 1
           fi
           echo "Release artifact matches source at tag $TAG. Verification passed."
