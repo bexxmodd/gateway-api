@@ -1,0 +1,52 @@
+name: Verify Release Artifacts
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-standard-install:
+    name: standard-install.yaml matches source at tag
+    runs-on: ubuntu-latest
+    # Only SemVer releases (v1.x.x) ship standard-install.yaml; monthly releases do not
+    if: startsWith(github.event.release.tag_name, 'v')
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c # tag=v6.1.0
+
+      - name: Download release assets and source, build, and compare
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.release.tag_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -e
+          workdir=$(mktemp -d)
+          cd "$workdir"
+
+          # Get standard-install.yaml from the release
+          gh release download "$TAG" --repo "$REPO" --pattern "standard-install.yaml" --dir .
+
+          if ! gh release download "$TAG" --repo "$REPO" --pattern "*.tar.gz" --dir . 2>/dev/null; then
+            curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
+            tar --extract --gunzip --file source.tar.gz
+          else
+            tar --extract --gunzip --file $(ls *.tar.gz | head -1)
+          fi
+
+          cd gateway-api-*
+          make build-install-yaml
+
+          # Normalize copyright year so we only fail on real content differences
+          sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' ../standard-install.yaml > /tmp/release.yaml
+          sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' release/standard-install.yaml > /tmp/built.yaml
+
+          if ! diff -u /tmp/release.yaml /tmp/built.yaml; then
+            echo ""
+            echo "::error::standard-install.yaml in the release does not match the source at tag $TAG."
+            exit 1
+          fi
+          echo "Release artifact matches source at tag. Verification passed."
