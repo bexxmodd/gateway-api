@@ -63,9 +63,10 @@ jobs:
           make build-install-yaml
 
           # B) Built file is in release/standard-install.yaml
-          # Normalize copyright year so we only fail on real content differences
-          sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' ../standard-install.yaml > /tmp/release.yaml
-          sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' release/standard-install.yaml > /tmp/built.yaml
+          # Normalize before diff: copyright year (build date) and line endings (CI vs release build env)
+          norm() { sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' "$1" | tr -d '\r'; }
+          norm ../standard-install.yaml > /tmp/release.yaml
+          norm release/standard-install.yaml > /tmp/built.yaml
 
           echo ""
           echo "Diff: (A) release asset  vs  (B) built from source. Lines with - are in release, + are in built."
