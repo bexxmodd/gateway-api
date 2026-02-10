@@ -7,6 +7,12 @@ name: Verify Release Artifacts
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to verify (e.g. v1.4.1). Required when run manually.'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -15,18 +21,28 @@ jobs:
   verify-standard-install:
     name: standard-install.yaml matches source at tag
     runs-on: ubuntu-latest
-    # Only SemVer releases (v1.x.x) ship standard-install.yaml; monthly releases do not
-    if: startsWith(github.event.release.tag_name, 'v')
+    # On release event: only SemVer tags; on manual run: always run (tag validated by input)
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'v')
     steps:
+      - name: Set tag for verification
+        id: set-tag
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ inputs.tag }}" >> $GITHUB_OUTPUT
+          else
+            echo "tag=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Set up Go
         uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c # tag=v6.1.0
 
       - name: Download release assets and source, build, and compare
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: ${{ steps.set-tag.outputs.tag }}
           REPO: ${{ github.repository }}
         run: |
+          echo "TAG: $TAG"
           set -e
           workdir=$(mktemp -d)
           cd "$workdir"
