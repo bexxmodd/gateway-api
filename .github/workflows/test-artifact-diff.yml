@@ -49,8 +49,10 @@ jobs:
           if ! gh release download "$TAG" --repo "$REPO" --pattern "*.tar.gz" --dir . 2>/dev/null; then
             curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
             tar --extract --gunzip --file source.tar.gz
+            echo ">>>> 1"
           else
             tar --extract --gunzip --file $(ls *.tar.gz | head -1)
+            echo ">>>> 2"
           fi
 
           cd gateway-api-*
