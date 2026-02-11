@@ -54,9 +54,7 @@ jobs:
           gh release download "$TAG" --repo "$REPO" --pattern "standard-install.yaml" --dir .
 
           # B) Get source tarball from release, or fall back to GitHub archive for this tag
-          if ! gh release download "$TAG" --repo "$REPO" --pattern "*.tar.gz" --dir . 2>/dev/null; then
-            curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
-          fi
+          curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
           tar --extract --gunzip --file $(ls *.tar.gz | head -1)
           cd gateway-api-*
           echo "Building standard-install.yaml from source at tag $TAG (same version)..."
