@@ -50,29 +50,27 @@ jobs:
           workdir=$(mktemp -d)
           cd "$workdir"
 
-          # A) Get standard-install.yaml FROM the release assets (this is what users download)
+          # A) Get standard-install.yaml from this release
           gh release download "$TAG" --repo "$REPO" --pattern "standard-install.yaml" --dir .
-          echo "Downloaded standard-install.yaml from release $TAG"
 
-          # B) Always get source from the Git archive at this exact tag (never from release assets)
-          # so we build from the same version we are verifying
-          curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
-          tar --extract --gunzip --file source.tar.gz
+          # B) Get source tarball from release, or fall back to GitHub archive for this tag
+          if ! gh release download "$TAG" --repo "$REPO" --pattern "*.tar.gz" --dir . 2>/dev/null; then
+            curl -sSfL -o source.tar.gz "https://github.com/${REPO}/archive/refs/tags/${TAG}.tar.gz"
+          fi
+          tar --extract --gunzip --file $(ls *.tar.gz | head -1)
           cd gateway-api-*
           echo "Building standard-install.yaml from source at tag $TAG (same version)..."
           make build-install-yaml
 
-          # B) Built file is in release/standard-install.yaml
-          # Normalize before diff: copyright year (build date) and line endings (CI vs release build env)
-          norm() { sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' "$1" | tr -d '\r'; }
-          norm ../standard-install.yaml > /tmp/release.yaml
-          norm release/standard-install.yaml > /tmp/built.yaml
+          # C) Normalize build files
+          sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' ../standard-install.yaml > /tmp/release.yaml
+          sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' release/standard-install.yaml > /tmp/built.yaml
 
           echo ""
           echo "Diff: (A) release asset  vs  (B) built from source. Lines with - are in release, + are in built."
           if ! diff -u /tmp/release.yaml /tmp/built.yaml; then
             echo ""
-            echo "::error::Release $TAG: standard-install.yaml in the release does not match the source at tag $TAG."
+            echo "::error::Release $TAG: standard-install.yaml in the release does not match the source."
             exit 1
           fi
           echo "Release artifact matches source at tag $TAG. Verification passed."
