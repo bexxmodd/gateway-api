@@ -1,11 +1,14 @@
 # Verify that release artifacts (standard-install.yaml) match the source at the release tag.
-# Catches cases where the release pipeline was run from a commit ahead of the tagged commit.
+# Runs when a new release is published (any tag). For release events, GitHub uses the workflow
+# from the default branch—ensure this file is on main (or your default branch).
+# For past releases that didn't trigger, run manually: Actions -> Verify Release Artifacts -> Run workflow.
 
 name: Verify Release Artifacts
 
 on:
   release:
-    types: [published]
+    types:
+      - published
   workflow_dispatch:
     inputs:
       tag:
@@ -20,8 +23,6 @@ jobs:
   verify-standard-install:
     name: standard-install.yaml matches source at tag
     runs-on: ubuntu-latest
-    # On release event: only SemVer tags; on manual run: always run (tag validated by input)
-    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'v')
     steps:
       - name: Set tag for verification
         id: set-tag
@@ -57,7 +58,7 @@ jobs:
           tar --extract --gunzip --file $(ls *.tar.gz | head -1)
           cd gateway-api-*
           echo "Building standard-install.yaml from source at tag $TAG (same version)..."
-          make build-install-yaml
+          COMMIT="$TAG" make build-install-yaml
 
           # C) Normalize build files
           sed 's/Copyright [0-9]\{4\}/Copyright YEAR/' ../standard-install.yaml > /tmp/release.yaml
