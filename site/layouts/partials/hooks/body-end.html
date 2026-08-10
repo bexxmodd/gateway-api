@@ -19,3 +19,132 @@
   forceExpandSidebar();
   window.addEventListener('load', forceExpandSidebar);
 </script>
+
+<script>
+  (function() {
+    var lastCopiedTime = 0;
+    var lastCopiedSnippet = '';
+
+    function getPrecedingHeading(element) {
+      var el = element;
+      while (el && el !== document.body) {
+        var prev = el.previousElementSibling;
+        while (prev) {
+          if (/^H[1-4]$/i.test(prev.tagName)) {
+            return prev.textContent.trim();
+          }
+          var nestedHeading = prev.querySelector ? prev.querySelector('h1, h2, h3, h4') : null;
+          if (nestedHeading) {
+            return nestedHeading.textContent.trim();
+          }
+          prev = prev.previousElementSibling;
+        }
+        el = el.parentElement;
+      }
+      return '';
+    }
+
+    function getCodeLanguage(container) {
+      if (!container) return 'unknown';
+      var codeEl = container.querySelector('code') || container;
+      var combinedClass = (codeEl.className || '') + ' ' + (container.className || '');
+      var classList = combinedClass.split(/\s+/);
+      for (var i = 0; i < classList.length; i++) {
+        var cls = classList[i];
+        if (cls.indexOf('language-') === 0) {
+          return cls.replace('language-', '');
+        }
+        if (cls.indexOf('lang-') === 0) {
+          return cls.replace('lang-', '');
+        }
+      }
+      var dataLang = codeEl.getAttribute('data-lang') || container.getAttribute('data-lang');
+      if (dataLang) return dataLang;
+      return 'unknown';
+    }
+
+    function extractResourceKind(codeText) {
+      if (!codeText) return '';
+      var match = codeText.match(/^\s*kind:\s*([A-Za-z0-9_-]+)/m);
+      return match ? match[1] : '';
+    }
+
+    function trackSnippetCopy(codeText, container, method) {
+      var trimmed = (codeText || '').trim();
+      if (!trimmed) return;
+
+      var now = Date.now();
+      // Debounce duplicate events within 1 second for the same snippet
+      if (now - lastCopiedTime < 1000 && lastCopiedSnippet === trimmed) {
+        return;
+      }
+      lastCopiedTime = now;
+      lastCopiedSnippet = trimmed;
+
+      var heading = getPrecedingHeading(container);
+      var language = getCodeLanguage(container);
+      var kind = extractResourceKind(trimmed);
+      var isGuide = window.location.pathname.indexOf('/guides') !== -1;
+
+      var eventParams = {
+        page_path: window.location.pathname,
+        page_title: document.title,
+        section_heading: heading || 'Introduction',
+        code_language: language,
+        resource_kind: kind || 'None',
+        snippet_length: trimmed.length,
+        copy_method: method,
+        is_guide: isGuide
+      };
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'snippet_copy', eventParams);
+      } else if (window.dataLayer) {
+        window.dataLayer.push(Object.assign({ event: 'snippet_copy' }, eventParams));
+      }
+    }
+
+    // 1. Listen for click on copy buttons (Docsy built-in click-to-copy or custom buttons)
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.btn-copy, .td-click-to-copy, [data-copy-button], button');
+      if (!btn) return;
+
+      var container = btn.closest('.highlight, pre, .td-content pre, div[class*="highlight"]');
+      if (!container) {
+        var targetId = btn.getAttribute('data-target') || btn.getAttribute('aria-controls');
+        if (targetId) {
+          container = document.getElementById(targetId);
+        }
+      }
+
+      if (container) {
+        var codeEl = container.querySelector('code') || container.querySelector('pre') || container;
+        var codeText = codeEl.innerText || codeEl.textContent;
+        trackSnippetCopy(codeText, container, 'button');
+      }
+    }, true);
+
+    // 2. Listen for manual text selection copying (Ctrl+C / Cmd+C / context menu copy) inside code blocks
+    document.addEventListener('copy', function() {
+      var selection = window.getSelection();
+      if (!selection || selection.isCollapsed) return;
+
+      try {
+        var range = selection.getRangeAt(0);
+        var container = range.commonAncestorContainer;
+        if (container && container.nodeType === Node.TEXT_NODE) {
+          container = container.parentElement;
+        }
+        if (container) {
+          var codeContainer = container.closest('pre, code, .highlight');
+          if (codeContainer) {
+            var selectedText = selection.toString();
+            trackSnippetCopy(selectedText, codeContainer, 'selection');
+          }
+        }
+      } catch (err) {
+        // Ignore selection range edge cases
+      }
+    });
+  })();
+</script>
